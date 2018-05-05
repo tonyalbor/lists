@@ -127,13 +127,7 @@
 		EAA9FBD2209E44B800E8F281 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				EABA765A209E74A90053E407 /* Yelp */,
-				EABA764F209E53C80053E407 /* Location */,
-				EAD4F57B209E4CC800EE0C46 /* Network */,
-				EAD4F578209E4C1A00EE0C46 /* AutoComplete */,
-				EAA9FBD3209E44B800E8F281 /* AppDelegate.swift */,
-				EAA9FBD5209E44B900E8F281 /* ViewController.swift */,
-				EABA7652209E6AD80053E407 /* ViewModelType.swift */,
+				EABA765F209E789E0053E407 /* Source */,
 				EAA9FBD7209E44B900E8F281 /* Main.storyboard */,
 				EAA9FBDA209E44B900E8F281 /* Assets.xcassets */,
 				EAA9FBDC209E44B900E8F281 /* LaunchScreen.storyboard */,
@@ -166,6 +160,20 @@
 				EABA765D209E757D0053E407 /* YelpApiKey.swift */,
 			);
 			path = Yelp;
+			sourceTree = "<group>";
+		};
+		EABA765F209E789E0053E407 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				EAA9FBD3209E44B800E8F281 /* AppDelegate.swift */,
+				EAA9FBD5209E44B900E8F281 /* ViewController.swift */,
+				EABA7652209E6AD80053E407 /* ViewModelType.swift */,
+				EAD4F578209E4C1A00EE0C46 /* AutoComplete */,
+				EABA764F209E53C80053E407 /* Location */,
+				EAD4F57B209E4CC800EE0C46 /* Network */,
+				EABA765A209E74A90053E407 /* Yelp */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 		EAD4F578209E4C1A00EE0C46 /* AutoComplete */ = {
