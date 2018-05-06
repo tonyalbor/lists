@@ -16,7 +16,7 @@ struct YelpNetwork: Network {
     
     func requestJson(_ request: APIRequest) -> Observable<Json> {
         return RxAlamofire
-            .json(request.method.toAlamofireMethod,
+            .json(request.method,
                   baseUrl + request.urlString,
                   parameters: nil,
                   encoding: URLEncoding.default,

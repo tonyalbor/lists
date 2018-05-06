@@ -22,6 +22,10 @@
 		EABA7659209E70EA0053E407 /* AutoCompleteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7658209E70EA0053E407 /* AutoCompleteResult.swift */; };
 		EABA765C209E74B30053E407 /* YelpNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA765B209E74B30053E407 /* YelpNetwork.swift */; };
 		EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA765D209E757D0053E407 /* YelpApiKey.swift */; };
+		EABA7662209E7CF70053E407 /* RestaurantSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */; };
+		EABA7664209E7D000053E407 /* RestaurantSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7663209E7D000053E407 /* RestaurantSearchResult.swift */; };
+		EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7665209E7D080053E407 /* RestaurantSearchService.swift */; };
+		EABA7668209E7D0F0053E407 /* RestaurantSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7667209E7D0F0053E407 /* RestaurantSearchViewModel.swift */; };
 		EAD4F57A209E4C3000EE0C46 /* AutoCompleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */; };
 		EAD4F57D209E4CF400EE0C46 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F57C209E4CF400EE0C46 /* Network.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +64,10 @@
 		EABA7658209E70EA0053E407 /* AutoCompleteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteResult.swift; sourceTree = "<group>"; };
 		EABA765B209E74B30053E407 /* YelpNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpNetwork.swift; sourceTree = "<group>"; };
 		EABA765D209E757D0053E407 /* YelpApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiKey.swift; sourceTree = "<group>"; };
+		EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchRequest.swift; sourceTree = "<group>"; };
+		EABA7663209E7D000053E407 /* RestaurantSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResult.swift; sourceTree = "<group>"; };
+		EABA7665209E7D080053E407 /* RestaurantSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchService.swift; sourceTree = "<group>"; };
+		EABA7667209E7D0F0053E407 /* RestaurantSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchViewModel.swift; sourceTree = "<group>"; };
 		EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteService.swift; sourceTree = "<group>"; };
 		EAD4F57C209E4CF400EE0C46 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,9 +179,21 @@
 				EAD4F578209E4C1A00EE0C46 /* AutoComplete */,
 				EABA764F209E53C80053E407 /* Location */,
 				EAD4F57B209E4CC800EE0C46 /* Network */,
+				EABA7660209E7CCE0053E407 /* RestaurantSearch */,
 				EABA765A209E74A90053E407 /* Yelp */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		EABA7660209E7CCE0053E407 /* RestaurantSearch */ = {
+			isa = PBXGroup;
+			children = (
+				EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */,
+				EABA7663209E7D000053E407 /* RestaurantSearchResult.swift */,
+				EABA7665209E7D080053E407 /* RestaurantSearchService.swift */,
+				EABA7667209E7D0F0053E407 /* RestaurantSearchViewModel.swift */,
+			);
+			path = RestaurantSearch;
 			sourceTree = "<group>";
 		};
 		EAD4F578209E4C1A00EE0C46 /* AutoComplete */ = {
@@ -412,8 +432,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EABA7668209E7D0F0053E407 /* RestaurantSearchViewModel.swift in Sources */,
+				EABA7662209E7CF70053E407 /* RestaurantSearchRequest.swift in Sources */,
 				EAA9FBD6209E44B900E8F281 /* ViewController.swift in Sources */,
 				EAD4F57A209E4C3000EE0C46 /* AutoCompleteService.swift in Sources */,
+				EABA7664209E7D000053E407 /* RestaurantSearchResult.swift in Sources */,
+				EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */,
 				EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */,
 				EABA7653209E6AD80053E407 /* ViewModelType.swift in Sources */,
 				EABA7651209E53E60053E407 /* LocationManager.swift in Sources */,

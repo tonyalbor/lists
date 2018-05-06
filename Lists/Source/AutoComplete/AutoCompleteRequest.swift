@@ -8,13 +8,14 @@
 
 import Alamofire
 
+// https://www.yelp.com/developers/documentation/v3/autocomplete
 struct AutoCompleteRequest: APIRequest {
-    let method = HttpMethod.get
+    let method = HTTPMethod.get
     var urlString: String {
-        let url = "autocomplete?text=\(query)&latitude=\(location.latitude)&longitude=\(location.longitude)"
+        let url = "autocomplete?text=\(query)&latitude=\(coordinates.latitude)&longitude=\(coordinates.longitude)"
         return url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
     
     let query: String
-    let location: Location
+    let coordinates: Coordinates
 }

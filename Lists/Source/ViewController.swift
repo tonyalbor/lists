@@ -17,8 +17,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+        testSearch()
+//        testAutocomplete()
+    }
+    
+    private func testAutocomplete() {
         let yelp = YelpNetwork()
         let yelpService = RestaurantAutoCompleteService(network: yelp)
         let locationManager = CoreLocationManager(manager: CLLocationManager())
@@ -33,14 +36,30 @@ class ViewController: UIViewController {
         output.results
             .drive(onNext: { (results) in
                 results.forEach({ (result) in
-                    print("result: \(result.text)")
+                    print("autocomplete result: \(result.text)")
                 })
             })
             .disposed(by: disposeBag)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func testSearch() {
+        let yelp = YelpNetwork()
+        let yelpService = YelpRestaurantSearchService(network: yelp)
+        let locationManager = CoreLocationManager(manager: CLLocationManager())
+        locationManager.requestAccess()
+        
+        let viewModel = RestaurantSearchViewModel(searchService: yelpService, locationManager: locationManager)
+        
+        let input: Driver<String?> = Driver.just("Spin Fish Poke House")
+        
+        let output = viewModel.transform(input: RestaurantSearchViewModel.Input(query: input))
+        
+        output.results
+            .drive(onNext: { (results) in
+                results.forEach({ (result) in
+                    print("search result: \(result.name)")
+                })
+            })
+            .disposed(by: disposeBag)
     }
 }

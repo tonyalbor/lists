@@ -9,7 +9,7 @@
 import RxSwift
 
 protocol AutoCompleteService {
-    func getResults(query: String, location: Location) -> Observable<[AutoCompleteResult]>
+    func getResults(query: String, coordinates: Coordinates) -> Observable<[AutoCompleteResult]>
 }
 
 struct RestaurantAutoCompleteService: AutoCompleteService {
@@ -20,8 +20,8 @@ struct RestaurantAutoCompleteService: AutoCompleteService {
         self.network = network
     }
     
-    func getResults(query: String, location: Location) -> Observable<[AutoCompleteResult]> {
-        let request = AutoCompleteRequest(query: query, location: location)
+    func getResults(query: String, coordinates: Coordinates) -> Observable<[AutoCompleteResult]> {
+        let request = AutoCompleteRequest(query: query, coordinates: coordinates)
         return network.requestJson(request)
             .catchError({ (error) -> Observable<[String : Any]> in
                 print(error)
@@ -29,11 +29,10 @@ struct RestaurantAutoCompleteService: AutoCompleteService {
             })
             .map { json -> [AutoCompleteResult] in
                 guard let terms = json["terms"] as? [Json] else {
-                    print("Failed parsing json: \(json)")
+                    print("Failed parsing autocomplete results: \(json)")
                     return []
                 }
-                
-                return terms.flatMap(AutoCompleteResult.init)
+                return terms.compactMap(AutoCompleteResult.init)
             }
     }
 }

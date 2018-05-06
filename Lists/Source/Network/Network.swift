@@ -10,26 +10,16 @@ import Alamofire
 import RxAlamofire
 import RxSwift
 
-enum HttpMethod {
-    case get
-    
-    var toAlamofireMethod: HTTPMethod {
-        switch self {
-        case .get: return .get
-        }
-    }
-}
-
 typealias Json = [String: Any]
 
 protocol APIRequest: URLRequestConvertible {
-    var method: HttpMethod { get }
+    var method: HTTPMethod { get }
     var urlString: String { get }
 }
 
 extension APIRequest {
     func asURLRequest() throws -> URLRequest {
-        return try URLRequest(url: urlString, method: method.toAlamofireMethod)
+        return try URLRequest(url: urlString, method: method)
     }
 }
 

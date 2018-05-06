@@ -9,19 +9,19 @@
 import CoreLocation
 import RxSwift
 
-typealias Location = CLLocationCoordinate2D
+typealias Coordinates = CLLocationCoordinate2D
 
 protocol LocationManager {
     func isEnabled() -> Observable<Bool>
     func requestAccess()
-    func currentCoordinates() -> Observable<Location?>
+    func currentCoordinates() -> Observable<Coordinates?>
 }
 
 class CoreLocationManager: NSObject, LocationManager {
     
     private let manager: CLLocationManager
     private let isEnabledSubject: Variable<Bool> = Variable(false)
-    private let currentLocationVariable: Variable<Location?> = Variable(nil)
+    private let currentLocationVariable: Variable<Coordinates?> = Variable(nil)
     
     init(manager: CLLocationManager) {
         self.manager = manager
@@ -38,7 +38,7 @@ class CoreLocationManager: NSObject, LocationManager {
         manager.requestWhenInUseAuthorization()
     }
     
-    func currentCoordinates() -> Observable<Location?> {
+    func currentCoordinates() -> Observable<Coordinates?> {
         return currentLocationVariable.asObservable()
     }
 }

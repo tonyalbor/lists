@@ -1,5 +1,5 @@
 //
-//  AutoCompleteViewModel.swift
+//  RestaurantSearchViewModel.swift
 //  Lists
 //
 //  Created by Tony Albor on 5/5/18.
@@ -8,21 +8,21 @@
 
 import RxCocoa
 
-class AutoCompleteViewModel: ViewModelType {
+class RestaurantSearchViewModel: ViewModelType {
     
     struct Input {
         let query: Driver<String?>
     }
     
     struct Output {
-        let results: Driver<[AutoCompleteResult]>
+        let results: Driver<[RestaurantSearchResult]>
     }
     
-    private let autoCompleteService: AutoCompleteService
+    private let searchService: RestaurantSearchService
     private let locationManager: LocationManager
     
-    init(autoCompleteService: AutoCompleteService, locationManager: LocationManager) {
-        self.autoCompleteService = autoCompleteService
+    init(searchService: RestaurantSearchService, locationManager: LocationManager) {
+        self.searchService = searchService
         self.locationManager = locationManager
     }
     
@@ -34,9 +34,9 @@ class AutoCompleteViewModel: ViewModelType {
         let results = Driver.combineLatest(input.query, coordinates)
             .filter { $0.0 != nil }
             .map { ($0.0!, $0.1) }
-            .flatMap { combined -> Driver<[AutoCompleteResult]> in
-                return self.autoCompleteService
-                    .getResults(query: combined.0, coordinates: combined.1)
+            .flatMap { combined -> Driver<[RestaurantSearchResult]> in
+                return self.searchService
+                    .getResults(query: combined.0, coordinates: combined.1, location: nil)
                     .asDriver(onErrorJustReturn: [])
             }
         return Output(results: results)
