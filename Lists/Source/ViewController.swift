@@ -17,8 +17,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        testSearch()
+//        testSearch()
 //        testAutocomplete()
+        testBusinessDetails()
     }
     
     private func testAutocomplete() {
@@ -57,8 +58,21 @@ class ViewController: UIViewController {
         output.results
             .drive(onNext: { (results) in
                 results.forEach({ (result) in
-                    print("search result: \(result.name)")
+                    print("search result: \(result.name), id: \(result.id)")
                 })
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func testBusinessDetails() {
+        let yelp = YelpNetwork()
+        let yelpService = YelpRestaurantDetailService(network: yelp)
+        let viewModel = RestaurantDetailViewModel(restaurantDetailService: yelpService)
+        let input = RestaurantDetailViewModel.Input(trigger: .just("PEBwHTrSJxJDnLMuo3hziQ"))
+        let output = viewModel.transform(input: input)
+        output.result
+            .drive(onNext: { (result) in
+                result.printed()
             })
             .disposed(by: disposeBag)
     }

@@ -21,7 +21,7 @@ struct RestaurantSearchRequest: APIRequest {
             url += "&longitude=\(coordinates.longitude)"
         }
         url += "&categories=restaurants"
-        return url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        return url.urlEncoded()
     }
     
     let query: String

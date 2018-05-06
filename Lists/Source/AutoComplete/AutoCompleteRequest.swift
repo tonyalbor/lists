@@ -13,7 +13,7 @@ struct AutoCompleteRequest: APIRequest {
     let method = HTTPMethod.get
     var urlString: String {
         let url = "autocomplete?text=\(query)&latitude=\(coordinates.latitude)&longitude=\(coordinates.longitude)"
-        return url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        return url.urlEncoded()
     }
     
     let query: String
