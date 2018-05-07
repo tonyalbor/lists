@@ -6,6 +6,7 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
 @UIApplicationMain
@@ -16,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let yelpNetwork = YelpNetwork()
+        let searchService = YelpRestaurantSearchService(network: yelpNetwork)
+        let locationManager = CoreLocationManager(manager: CLLocationManager())
+        let viewModel = RestaurantSearchViewModel(searchService: searchService, locationManager: locationManager)
+        let viewController = RestaurantSearchViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.navigationBar.prefersLargeTitles = true
+        
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
