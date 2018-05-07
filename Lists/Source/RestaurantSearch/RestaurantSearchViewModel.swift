@@ -8,7 +8,7 @@
 
 import RxCocoa
 
-class RestaurantSearchViewModel: ViewModelType {
+struct RestaurantSearchViewModel: ViewModelType {
     
     struct Input {
         let query: Driver<String?>
@@ -30,10 +30,14 @@ class RestaurantSearchViewModel: ViewModelType {
         let coordinates = locationManager.currentCoordinates()
             .filter { $0 != nil }
             .map { $0! }
+            .single()
             .asDriver(onErrorJustReturn: Coordinates(latitude: 0, longitude: 0))
         let results = Driver.combineLatest(input.query, coordinates)
             .filter { $0.0 != nil }
             .map { ($0.0!, $0.1) }
+            .distinctUntilChanged({ (lsh, rhs) -> Bool in
+                return true
+            })
             .flatMap { combined -> Driver<[RestaurantSearchResult]> in
                 return self.searchService
                     .getResults(query: combined.0, coordinates: combined.1, location: nil)

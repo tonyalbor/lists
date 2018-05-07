@@ -64,7 +64,7 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
     
     private func setUpTableView() {
         tableView.registerCell(RestaurantSearchResultTableViewCell.self)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = 150
     }
     
     private func bindViewModel() {
@@ -72,7 +72,7 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
             query: searchBar.rx.text.asDriver())
         let output = viewModel.transform(input: input)
         output.results
-            .drive(tableView.rx.items) { table, index, result in
+            .drive(tableView.rx.items) { table, _, result in
                 let cell = table.dequeueReusableCell(RestaurantSearchResultTableViewCell.self)
                 cell.result = result
                 return cell
@@ -82,12 +82,12 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
 }
 
 //extension RestaurantSearchViewController: UISearchResultsUpdating {
-//    
+//
 //    func updateSearchResults(for searchController: UISearchController) {
 //        if let text = searchController.searchBar.text, !text.isEmpty {
-//            
+//
 //        } else {
-//            
+//
 //        }
 //    }
 //}

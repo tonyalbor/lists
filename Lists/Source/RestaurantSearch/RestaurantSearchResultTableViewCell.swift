@@ -6,6 +6,7 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import AlamofireImage
 import UIKit
 
 protocol Reusable {
@@ -23,9 +24,11 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     var result: RestaurantSearchResult? {
         didSet {
             guard let result = result else { return }
+            backgroundImage.image = nil
+            backgroundImage.af_setImage(withURL: result.imageUrl)
             name.text = result.name
             rating.text = "\(result.rating)"
-            reviewCount.text = "\(result.reviewCount)"
+            reviewCount.text = "(\(result.reviewCount))"
             price.text = result.price
         }
     }
@@ -40,14 +43,16 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     private(set) lazy var imageOverlay: UIView = {
         let overlay = UIView()
         overlay.backgroundColor = .black
-        overlay.alpha = 0.25
+        overlay.alpha = 0.5
         overlay.translatesAutoresizingMaskIntoConstraints = false
         return overlay
     }()
     
     private(set) lazy var name: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 2
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = .boldSystemFont(ofSize: 20.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -61,6 +66,7 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     
     private(set) lazy var rating: UILabel = {
         let label = UILabel()
+        label.textColor = .white
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -68,6 +74,7 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     
     private(set) lazy var reviewCount: UILabel = {
         let label = UILabel()
+        label.textColor = .white
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -75,6 +82,7 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     
     private(set) lazy var price: UILabel = {
         let label = UILabel()
+        label.textColor = .white
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -82,6 +90,7 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        clipsToBounds = true
         setUpViews()
         setUpConstraints()
     }
@@ -124,7 +133,7 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
             reviewCount.trailingAnchor.constraint(equalTo: ratingContainer.trailingAnchor),
         ]
         constraints += [
-            price.topAnchor.constraint(equalTo: ratingContainer.topAnchor, constant: 8.0),
+            price.topAnchor.constraint(equalTo: ratingContainer.bottomAnchor, constant: 8.0),
             price.centerXAnchor.constraint(equalTo: centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)

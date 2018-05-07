@@ -46,3 +46,8 @@ extension RestaurantSearchResult {
                                       price: price)
     }
 }
+
+extension RestaurantSearchResult: Equatable {}
+func ==(lhs: RestaurantSearchResult, rhs: RestaurantSearchResult) -> Bool {
+    return lhs.id == rhs.id && lhs.name == rhs.name
+}
