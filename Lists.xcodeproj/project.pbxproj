@@ -41,6 +41,10 @@
 		EAEC92E7209FC1170005843A /* RestaurantSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEC92E5209FC1170005843A /* RestaurantSearchViewController.xib */; };
 		EAEC92EA209FC2300005843A /* RestaurantSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92E8209FC2300005843A /* RestaurantSearchResultTableViewCell.swift */; };
 		EAEC92EB209FC2300005843A /* RestaurantSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEC92E9209FC2300005843A /* RestaurantSearchResultTableViewCell.xib */; };
+		EAEC92ED20A02CC30005843A /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92EC20A02CC30005843A /* RestaurantDetailViewController.swift */; };
+		EAEC92EF20A02D3F0005843A /* RestaurantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92EE20A02D3F0005843A /* RestaurantDetailView.swift */; };
+		EAFAD12920BB9A700009D68B /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFAD12820BB9A700009D68B /* ImageViewController.swift */; };
+		EAFAD12B20BB9A880009D68B /* ImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFAD12A20BB9A880009D68B /* ImageContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +100,10 @@
 		EAEC92E5209FC1170005843A /* RestaurantSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantSearchViewController.xib; sourceTree = "<group>"; };
 		EAEC92E8209FC2300005843A /* RestaurantSearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		EAEC92E9209FC2300005843A /* RestaurantSearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantSearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		EAEC92EC20A02CC30005843A /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
+		EAEC92EE20A02D3F0005843A /* RestaurantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailView.swift; sourceTree = "<group>"; };
+		EAFAD12820BB9A700009D68B /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		EAFAD12A20BB9A880009D68B /* ImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +262,10 @@
 				EAEC92D0209ECFFC0005843A /* RestaurantDetailRequest.swift */,
 				EAEC92D2209ED00A0005843A /* RestaurantDetailResult.swift */,
 				EAEC92D4209ED0110005843A /* RestaurantDetailService.swift */,
+				EAEC92EE20A02D3F0005843A /* RestaurantDetailView.swift */,
+				EAEC92EC20A02CC30005843A /* RestaurantDetailViewController.swift */,
+				EAFAD12820BB9A700009D68B /* ImageViewController.swift */,
+				EAFAD12A20BB9A880009D68B /* ImageContentView.swift */,
 				EAEC92D6209ED0350005843A /* RestaurantDetailViewModel.swift */,
 			);
 			path = RestaurantDetail;
@@ -506,9 +518,12 @@
 				EABA7662209E7CF70053E407 /* RestaurantSearchRequest.swift in Sources */,
 				EAEC92D7209ED0350005843A /* RestaurantDetailViewModel.swift in Sources */,
 				EAEC92E6209FC1170005843A /* RestaurantSearchViewController.swift in Sources */,
+				EAEC92ED20A02CC30005843A /* RestaurantDetailViewController.swift in Sources */,
+				EAFAD12B20BB9A880009D68B /* ImageContentView.swift in Sources */,
 				EAA9FBD6209E44B900E8F281 /* ViewController.swift in Sources */,
 				EAD4F57A209E4C3000EE0C46 /* AutoCompleteService.swift in Sources */,
 				EABA7664209E7D000053E407 /* RestaurantSearchResult.swift in Sources */,
+				EAFAD12920BB9A700009D68B /* ImageViewController.swift in Sources */,
 				EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */,
 				EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */,
 				EABA7653209E6AD80053E407 /* ViewModelType.swift in Sources */,
@@ -522,6 +537,7 @@
 				EAEC92D5209ED0110005843A /* RestaurantDetailService.swift in Sources */,
 				EABA7659209E70EA0053E407 /* AutoCompleteResult.swift in Sources */,
 				EAEC92D1209ECFFC0005843A /* RestaurantDetailRequest.swift in Sources */,
+				EAEC92EF20A02D3F0005843A /* RestaurantDetailView.swift in Sources */,
 				EAA9FBD4209E44B800E8F281 /* AppDelegate.swift in Sources */,
 				EABA7657209E70C20053E407 /* AutoCompleteRequest.swift in Sources */,
 				EAEC92EA209FC2300005843A /* RestaurantSearchResultTableViewCell.swift in Sources */,

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.prefersLargeTitles = true
         
-        window?.rootViewController = navigationController
+        window?.rootViewController = RestaurantDetailViewController()//navigationController
         window?.makeKeyAndVisible()
         
         return true
