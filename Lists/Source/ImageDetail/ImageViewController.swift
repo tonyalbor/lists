@@ -19,6 +19,7 @@ class ImageViewController: UIViewController {
     }
     
     private let image: UIImage?
+    private(set) var interactionController: UIPercentDrivenInteractiveTransition?
     
     init(image: UIImage?) {
         self.image = image
@@ -34,11 +35,6 @@ class ImageViewController: UIViewController {
         setUpActions()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("nice")
-    }
-    
     private func setUpActions() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleImageViewTap))
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
@@ -51,22 +47,24 @@ class ImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    var interactionController: UIPercentDrivenInteractiveTransition?
-    
     @objc
     private func handlePan(pan: UIPanGestureRecognizer) {
         let translation = pan.translation(in: pan.view)
-        let percentage = fabs(translation.y / view.bounds.height) * 2
+        let percentage = fabs(translation.y * 2 / contentView.imageView.bounds.height)
         switch pan.state {
         case .began:
             pan.setTranslation(.zero, in: pan.view)
             interactionController = UIPercentDrivenInteractiveTransition()
             dismiss(animated: true, completion: nil)
         case .changed:
+            contentView.imageView.transform = CGAffineTransform(translationX: translation.x,
+                                                                y: translation.y)
             interactionController?.update(percentage)
         case .ended, .cancelled, .failed:
             let velocity = abs(pan.velocity(in: pan.view).y)
-            if (percentage > 0.5 && velocity >= 0) || velocity > 0 {
+            if (percentage > 0.85 && velocity >= 0) ||
+               (percentage > 0.65 && velocity >= 25) ||
+               (velocity > 50) {
                 interactionController?.finish()
             } else {
                 interactionController?.cancel()

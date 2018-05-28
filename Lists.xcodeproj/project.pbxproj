@@ -15,6 +15,7 @@
 		EAA9FBDB209E44B900E8F281 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA9FBDA209E44B900E8F281 /* Assets.xcassets */; };
 		EAA9FBDE209E44B900E8F281 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA9FBDC209E44B900E8F281 /* LaunchScreen.storyboard */; };
 		EAA9FBE9209E44B900E8F281 /* ListsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9FBE8209E44B900E8F281 /* ListsTests.swift */; };
+		EAAFD4C920BCB01300F3A7A7 /* ImageViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFD4C820BCB01300F3A7A7 /* ImageViewAnimator.swift */; };
 		EABA7651209E53E60053E407 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7650209E53E60053E407 /* LocationManager.swift */; };
 		EABA7653209E6AD80053E407 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7652209E6AD80053E407 /* ViewModelType.swift */; };
 		EABA7655209E70310053E407 /* AutoCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7654209E70310053E407 /* AutoCompleteViewModel.swift */; };
@@ -74,6 +75,7 @@
 		EAA9FBE4209E44B900E8F281 /* ListsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA9FBE8209E44B900E8F281 /* ListsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsTests.swift; sourceTree = "<group>"; };
 		EAA9FBEA209E44B900E8F281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAAFD4C820BCB01300F3A7A7 /* ImageViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAnimator.swift; sourceTree = "<group>"; };
 		EABA7650209E53E60053E407 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EABA7652209E6AD80053E407 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		EABA7654209E70310053E407 /* AutoCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteViewModel.swift; sourceTree = "<group>"; };
@@ -187,6 +189,16 @@
 			path = ListsTests;
 			sourceTree = "<group>";
 		};
+		EAAFD4C720BCAFE700F3A7A7 /* ImageDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EAFAD12820BB9A700009D68B /* ImageViewController.swift */,
+				EAFAD12A20BB9A880009D68B /* ImageContentView.swift */,
+				EAAFD4C820BCB01300F3A7A7 /* ImageViewAnimator.swift */,
+			);
+			path = ImageDetail;
+			sourceTree = "<group>";
+		};
 		EABA764F209E53C80053E407 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +224,7 @@
 				EABA7652209E6AD80053E407 /* ViewModelType.swift */,
 				EAEC92D8209ED1AF0005843A /* Extensions */,
 				EAD4F578209E4C1A00EE0C46 /* AutoComplete */,
+				EAAFD4C720BCAFE700F3A7A7 /* ImageDetail */,
 				EABA764F209E53C80053E407 /* Location */,
 				EAEC92DB209FBC610005843A /* Lists */,
 				EAD4F57B209E4CC800EE0C46 /* Network */,
@@ -264,8 +277,6 @@
 				EAEC92D4209ED0110005843A /* RestaurantDetailService.swift */,
 				EAEC92EE20A02D3F0005843A /* RestaurantDetailView.swift */,
 				EAEC92EC20A02CC30005843A /* RestaurantDetailViewController.swift */,
-				EAFAD12820BB9A700009D68B /* ImageViewController.swift */,
-				EAFAD12A20BB9A880009D68B /* ImageContentView.swift */,
 				EAEC92D6209ED0350005843A /* RestaurantDetailViewModel.swift */,
 			);
 			path = RestaurantDetail;
@@ -533,6 +544,7 @@
 				EAEC92DA209ED1C10005843A /* StringExtensions.swift in Sources */,
 				EABA7655209E70310053E407 /* AutoCompleteViewModel.swift in Sources */,
 				EAEC92DE209FBC8A0005843A /* ListsViewController.swift in Sources */,
+				EAAFD4C920BCB01300F3A7A7 /* ImageViewAnimator.swift in Sources */,
 				EAD4F57D209E4CF400EE0C46 /* Network.swift in Sources */,
 				EAEC92D5209ED0110005843A /* RestaurantDetailService.swift in Sources */,
 				EABA7659209E70EA0053E407 /* AutoCompleteResult.swift in Sources */,
