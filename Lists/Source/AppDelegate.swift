@@ -6,6 +6,7 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import Alamofire
 import CoreLocation
 import UIKit
 
@@ -18,14 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let yelpNetwork = YelpNetwork()
-        let searchService = YelpRestaurantSearchService(network: yelpNetwork)
+        let yelpNetwork2 = YelpNetworkV2(sessionManager: SessionManager())
+        let searchService = YelpRestaurantSearchService(network: yelpNetwork2)
         let locationManager = CoreLocationManager(manager: CLLocationManager())
-        let viewModel = RestaurantSearchViewModel(searchService: searchService, locationManager: locationManager)
-        let viewController = RestaurantSearchViewController(viewModel: viewModel)
+//        let viewModel = RestaurantSearchViewModel(searchService: searchService, locationManager: locationManager)
+        let context = RestaurantSearchContext(service: searchService, locationManager: locationManager)
+        let viewController = RestaurantSearchViewController(context: context)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.prefersLargeTitles = true
         
-        window?.rootViewController = RestaurantDetailViewController()//navigationController
+//        window?.rootViewController = RestaurantDetailViewController()//navigationController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
         return true

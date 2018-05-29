@@ -27,14 +27,16 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     private func present(context: UIViewControllerContextTransitioning) {
-        guard let from = context.viewController(forKey: .from) as? RestaurantDetailViewController,
-            let to = context.viewController(forKey: .to) as? ImageViewController else {
+        guard let fromNavigation = context.viewController(forKey: .from) as? UINavigationController,
+              let from = fromNavigation.childViewControllers.last as? RestaurantDetailViewController,
+              let to = context.viewController(forKey: .to) as? ImageViewController else {
                 return
         }
         let startingWidth = from.contentView.imageView.bounds.width
         let finishingWidth = context.finalFrame(for: to).width
-        let pct = 1.0 / (startingWidth / finishingWidth)
+        let scale = 1.0 / (startingWidth / finishingWidth)
         context.containerView.addSubview(to.view)
+        to.view.isHidden = true
         UIView.animate(
             withDuration: transitionDuration(using: context),
             delay: 0,
@@ -42,12 +44,15 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             initialSpringVelocity: 0.75,
             options: UIViewAnimationOptions.curveEaseOut,
             animations: {
+                fromNavigation.navigationBar.alpha = 0
                 from.contentView.imageViewContainer.backgroundColor = .black
                 from.view.backgroundColor = .black
-                from.contentView.imageView.transform = CGAffineTransform(scaleX: pct, y: pct)
+                from.contentView.imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
             },
             completion: { finished in
+                fromNavigation.navigationBar.alpha = 1
                 to.view.frame = context.finalFrame(for: to)
+                to.view.isHidden = false
                 from.contentView.imageView.transform = .identity
                 from.view.backgroundColor = .white
                 from.contentView.backgroundColor = .white
@@ -66,18 +71,18 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     private func dismissAnimated(context: UIViewControllerContextTransitioning) {
         guard let from = context.viewController(forKey: .from) as? ImageViewController,
-            let to = context.viewController(forKey: .to) as? RestaurantDetailViewController,
+            let toNav = context.viewController(forKey: .to) as? UINavigationController,
+            let to = toNav.childViewControllers.last as? RestaurantDetailViewController,
             let fromView = context.view(forKey: .from) as? ImageContentView else {
                 return
         }
-        let toFinalFrame = context.finalFrame(for: to)
-        let fromWidth = fromView.bounds.width
-        let toWidth = to.contentView.imageView.bounds.width
-        let scale = toWidth / fromWidth
-        context.containerView.insertSubview(to.view, belowSubview: fromView)
-        to.view.frame = toFinalFrame
-        let originalFrame = to.contentView.imageView.frame
-        to.contentView.imageView.frame = fromView.imageView.frame
+        context.containerView.insertSubview(toNav.view, belowSubview: fromView)
+        let imageCopy = UIImageView(image: fromView.imageView.image)
+        context.containerView.addSubview(imageCopy)
+        imageCopy.contentMode = .scaleAspectFit
+        imageCopy.frame = fromView.imageView.frame
+        toNav.view.frame = context.finalFrame(for: toNav)
+        to.view.frame = context.finalFrame(for: to)
         UIView.animate(
             withDuration: transitionDuration(using: context),
             delay: 0,
@@ -87,16 +92,16 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             animations: {
                 fromView.alpha = 0
                 fromView.backgroundColor = .white
-                fromView.imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
-                to.contentView.imageView.frame = originalFrame
-                to.view.backgroundColor = .white
+                imageCopy.frame = to.contentView.imageView.frame
+                toNav.view.backgroundColor = .white
                 to.contentView.backgroundColor = .white
                 to.contentView.imageViewContainer.backgroundColor = .white
             },
             completion: { finished in
                 let success = !context.transitionWasCancelled
+                toNav.view.frame = context.finalFrame(for: toNav)
                 if success {
-                    to.view.removeFromSuperview()
+                    toNav.view.removeFromSuperview()
                 }
                 fromView.frame = context.finalFrame(for: from)
                 context.completeTransition(success)
@@ -105,12 +110,13 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     private func dismissInteractive(context: UIViewControllerContextTransitioning) {
         guard let from = context.viewController(forKey: .from) as? ImageViewController,
-            let to = context.viewController(forKey: .to) as? RestaurantDetailViewController,
+            let toNav = context.viewController(forKey: .to) as? UINavigationController,
+            let to = toNav.childViewControllers.last as? RestaurantDetailViewController,
             let fromView = context.view(forKey: .from) as? ImageContentView else {
                 return
         }
-        context.containerView.insertSubview(to.view, belowSubview: fromView)
-        to.view.frame = context.finalFrame(for: to)
+        context.containerView.insertSubview(toNav.view, belowSubview: fromView)
+        toNav.view.frame = context.finalFrame(for: toNav)
         to.view.backgroundColor = .black
         to.contentView.imageViewContainer.backgroundColor = .black
         to.contentView.imageView.isHidden = true
@@ -136,6 +142,7 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                             to.view.backgroundColor = .white
                             to.contentView.imageViewContainer.backgroundColor = .white
                             fromView.backgroundColor = .clear
+                            fromView.imageView.contentMode = .scaleAspectFit
                             fromView.imageView.frame = to.contentView.imageView.frame
                         }
                     },
@@ -143,7 +150,7 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                         let success = !context.transitionWasCancelled
                         if success {
                             to.contentView.imageView.isHidden = false
-                            to.view.removeFromSuperview()
+                            toNav.view.removeFromSuperview()
                         }
                         fromView.frame = context.finalFrame(for: from)
                         context.completeTransition(success)

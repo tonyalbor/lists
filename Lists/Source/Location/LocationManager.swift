@@ -7,21 +7,18 @@
 //
 
 import CoreLocation
-import RxSwift
 
 typealias Coordinates = CLLocationCoordinate2D
 
 protocol LocationManager {
-    func isEnabled() -> Observable<Bool>
+    var isEnabled: Bool { get }
     func requestAccess()
-    func currentCoordinates() -> Observable<Coordinates?>
+    var currentCoordinates: Coordinates? { get }
 }
 
 class CoreLocationManager: NSObject, LocationManager {
     
     private let manager: CLLocationManager
-    private let isEnabledSubject: Variable<Bool> = Variable(false)
-    private let currentLocationVariable: Variable<Coordinates?> = Variable(nil)
     
     init(manager: CLLocationManager) {
         self.manager = manager
@@ -29,29 +26,25 @@ class CoreLocationManager: NSObject, LocationManager {
         self.manager.delegate = self
     }
     
-    func isEnabled() -> Observable<Bool> {
-        isEnabledSubject.value = CLLocationManager.locationServicesEnabled()
-        return isEnabledSubject.asObservable()
+    var isEnabled: Bool {
+        return CLLocationManager.locationServicesEnabled()
     }
     
     func requestAccess() {
         manager.requestWhenInUseAuthorization()
     }
     
-    func currentCoordinates() -> Observable<Coordinates?> {
-        return currentLocationVariable.asObservable()
-    }
+    private(set) var currentCoordinates: Coordinates?
 }
 
 extension CoreLocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocationVariable.value = locations.last?.coordinate
+        currentCoordinates = locations.last?.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         let isNowEnabled = status == .authorizedWhenInUse
-        isEnabledSubject.value = isNowEnabled
         
         if isNowEnabled {
             manager.startUpdatingLocation()

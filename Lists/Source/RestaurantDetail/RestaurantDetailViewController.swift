@@ -17,12 +17,25 @@ class RestaurantDetailViewController: UIViewController {
     var contentView: RestaurantDetailView {
         return view as! RestaurantDetailView
     }
-
+    
+    private let context: RestaurantDetailContext
+    private let searchResult: RestaurantSearchResult
+    
+    init(context: RestaurantDetailContext, searchResult: RestaurantSearchResult) {
+        self.context = context
+        self.searchResult = searchResult
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = URL(string: "https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/1600x900/format/jpg/quality/85/https%3A%2F%2Fstatic.makers.com%2Ffield%2Fimage%2Fsushiplate+crop.jpg")!
-        contentView.imageView.af_setImage(withURL: url)
+        contentView.imageView.af_setImage(withURL: searchResult.imageUrl)
         setUpActions()
+        // request full details
     }
     
     private func setUpActions() {

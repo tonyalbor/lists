@@ -6,8 +6,7 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import RxCocoa
-import RxSwift
+import Alamofire
 import UIKit
 
 protocol NibIdentifiable {
@@ -34,12 +33,12 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
 
     @IBOutlet private weak var tableView: UITableView!
     
-    private let viewModel: RestaurantSearchViewModel
+    private let context: RestaurantSearchContext
     private var searchBar: UISearchBar!
-    private let disposeBag = DisposeBag()
+//    private let disposeBag = DisposeBag()
     
-    init(viewModel: RestaurantSearchViewModel) {
-        self.viewModel = viewModel
+    init(context: RestaurantSearchContext) {
+        self.context = context
         super.init(nibName: RestaurantSearchViewController.nibName, bundle: nil)
     }
     
@@ -51,7 +50,7 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
         super.viewDidLoad()
         setUpNavBar()
         setUpTableView()
-        bindViewModel()
+//        bindViewModel()
     }
     
     private func setUpNavBar() {
@@ -60,24 +59,58 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
 //        search.searchResultsUpdater = self
         navigationItem.searchController = search
         searchBar = search.searchBar
+        searchBar.delegate = self
     }
     
     private func setUpTableView() {
         tableView.registerCell(RestaurantSearchResultTableViewCell.self)
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.rowHeight = 150
     }
     
-    private func bindViewModel() {
-        let input = RestaurantSearchViewModel.Input(
-            query: searchBar.rx.text.asDriver())
-        let output = viewModel.transform(input: input)
-        output.results
-            .drive(tableView.rx.items) { table, _, result in
-                let cell = table.dequeueReusableCell(RestaurantSearchResultTableViewCell.self)
-                cell.result = result
-                return cell
-            }
-            .disposed(by: disposeBag)
+//    private func bindViewModel() {
+//        let input = RestaurantSearchViewModel.Input(
+//            query: searchBar.rx.text.asDriver())
+//        let output = viewModel.transform(input: input)
+//        output.results
+//            .drive(tableView.rx.items) { table, _, result in
+//                let cell = table.dequeueReusableCell(RestaurantSearchResultTableViewCell.self)
+//                cell.result = result
+//                return cell
+//            }
+//            .disposed(by: disposeBag)
+//    }
+}
+
+extension RestaurantSearchViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return context.results.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(RestaurantSearchResultTableViewCell.self)
+        cell.result = context.results[indexPath.row]
+        return cell
+    }
+}
+
+extension RestaurantSearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailService = YelpRestaurantDetailService(network: YelpNetworkV2(sessionManager: SessionManager()))
+        let detailContext = RestaurantDetailContext(service: detailService)
+        let detail = RestaurantDetailViewController(context: detailContext, searchResult: context.results[indexPath.row])
+        navigationController?.pushViewController(detail, animated: true)
+    }
+}
+
+extension RestaurantSearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        context.getResults(query: searchBar.text ?? "") { [weak self] result in
+            self?.tableView.reloadData()
+        }
     }
 }
 

@@ -49,13 +49,12 @@ class RestaurantDetailView: UIView {
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 200.0),
-            imageView.heightAnchor.constraint(equalToConstant: 200.0),
         ]
         constraints += [
-            imageViewContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageViewContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageViewContainer.widthAnchor.constraint(equalToConstant: 220.0),
-            imageViewContainer.heightAnchor.constraint(equalToConstant: 220.0),
+            imageViewContainer.topAnchor.constraint(equalTo: imageView.topAnchor, constant: -10),
+            imageViewContainer.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: -10),
+            imageViewContainer.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            imageViewContainer.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
         ]
         NSLayoutConstraint.activate(constraints)
     }

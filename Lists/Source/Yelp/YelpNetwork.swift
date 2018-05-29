@@ -10,6 +10,22 @@ import Alamofire
 import RxAlamofire
 import RxSwift
 
+struct YelpNetworkV2 {
+    let sessionManager: SessionManager
+    func requestJson(_ request: APIRequest, completion: @escaping (Result<Any>) -> Void) {
+        sessionManager
+            .request(request,
+                     method: request.method,
+                     parameters: nil,
+                     encoding: URLEncoding.default,
+                     headers: ["Authorization": "Bearer" + " " + YelpApiKey.app])
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                completion(response.result)
+            }
+    }
+}
+
 struct YelpNetwork: Network {
     
     let baseUrl = "https://api.yelp.com/v3/"

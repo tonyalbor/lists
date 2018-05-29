@@ -12,7 +12,7 @@ class ImageContentView: UIView {
     
     private(set) lazy var imageView: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

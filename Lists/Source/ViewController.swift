@@ -6,6 +6,7 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import Alamofire
 import CoreLocation
 import RxCocoa
 import RxSwift
@@ -44,36 +45,36 @@ class ViewController: UIViewController {
     }
     
     private func testSearch() {
-        let yelp = YelpNetwork()
+        let yelp = YelpNetworkV2(sessionManager: SessionManager())
         let yelpService = YelpRestaurantSearchService(network: yelp)
         let locationManager = CoreLocationManager(manager: CLLocationManager())
         locationManager.requestAccess()
         
-        let viewModel = RestaurantSearchViewModel(searchService: yelpService, locationManager: locationManager)
+//        let viewModel = RestaurantSearchViewModel(searchService: yelpService, locationManager: locationManager)
         
-        let input: Driver<String?> = Driver.just("Spin Fish Poke House")
+//        let input: Driver<String?> = Driver.just("Spin Fish Poke House")
         
-        let output = viewModel.transform(input: RestaurantSearchViewModel.Input(query: input))
+//        let output = viewModel.transform(input: RestaurantSearchViewModel.Input(query: input))
         
-        output.results
-            .drive(onNext: { (results) in
-                results.forEach({ (result) in
-                    print("search result: \(result.name), id: \(result.id)")
-                })
-            })
-            .disposed(by: disposeBag)
+//        output.results
+//            .drive(onNext: { (results) in
+//                results.forEach({ (result) in
+//                    print("search result: \(result.name), id: \(result.id)")
+//                })
+//            })
+//            .disposed(by: disposeBag)
     }
     
     private func testBusinessDetails() {
-        let yelp = YelpNetwork()
-        let yelpService = YelpRestaurantDetailService(network: yelp)
-        let viewModel = RestaurantDetailViewModel(restaurantDetailService: yelpService)
-        let input = RestaurantDetailViewModel.Input(trigger: .just("PEBwHTrSJxJDnLMuo3hziQ"))
-        let output = viewModel.transform(input: input)
-        output.result
-            .drive(onNext: { (result) in
-                result.printed()
-            })
-            .disposed(by: disposeBag)
+//        let yelp = YelpNetwork()
+//        let yelpService = YelpRestaurantDetailService(network: yelp)
+//        let viewModel = RestaurantDetailViewModel(restaurantDetailService: yelpService)
+//        let input = RestaurantDetailViewModel.Input(trigger: .just("PEBwHTrSJxJDnLMuo3hziQ"))
+//        let output = viewModel.transform(input: input)
+//        output.result
+//            .drive(onNext: { (result) in
+//                result.printed()
+//            })
+//            .disposed(by: disposeBag)
     }
 }
