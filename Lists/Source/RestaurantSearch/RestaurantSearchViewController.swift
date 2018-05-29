@@ -29,6 +29,16 @@ extension UITableView {
     }
 }
 
+extension UICollectionView {
+    func registerCell<Cell: UICollectionViewCell>(_: Cell.Type = Cell.self) where Cell: Reusable {
+        register(Cell.self, forCellWithReuseIdentifier: Cell.reuseIdentifier)
+    }
+    
+    func dequeueResuableCell<Cell: UICollectionViewCell>(_: Cell.Type = Cell.self, indexPath: IndexPath) -> Cell where Cell: Reusable {
+        return dequeueReusableCell(withReuseIdentifier: Cell.reuseIdentifier, for: indexPath) as! Cell
+    }
+}
+
 class RestaurantSearchViewController: UIViewController, NibIdentifiable {
 
     @IBOutlet private weak var tableView: UITableView!
@@ -85,7 +95,7 @@ extension RestaurantSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailService = YelpRestaurantDetailService(network: YelpNetwork(sessionManager: SessionManager()))
         let detailContext = RestaurantDetailContext(service: detailService)
-        let detail = RestaurantDetailViewController(context: detailContext, searchResult: context.results[indexPath.row])
+        let detail = RestaurantDetailViewController(context: detailContext, searchResult: context.results[indexPath.row], allResults: context.results)
         navigationController?.pushViewController(detail, animated: true)
     }
 }

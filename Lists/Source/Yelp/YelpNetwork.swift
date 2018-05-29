@@ -7,8 +7,6 @@
 //
 
 import Alamofire
-import RxAlamofire
-import RxSwift
 
 struct YelpNetwork: Network {
     

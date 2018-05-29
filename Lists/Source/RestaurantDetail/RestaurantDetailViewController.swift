@@ -20,10 +20,12 @@ class RestaurantDetailViewController: UIViewController {
     
     private let context: RestaurantDetailContext
     private let searchResult: RestaurantSearchResult
+    private let allResults: [RestaurantSearchResult]
     
-    init(context: RestaurantDetailContext, searchResult: RestaurantSearchResult) {
+    init(context: RestaurantDetailContext, searchResult: RestaurantSearchResult, allResults: [RestaurantSearchResult]) {
         self.context = context
         self.searchResult = searchResult
+        self.allResults = allResults
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,8 +36,18 @@ class RestaurantDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.imageView.af_setImage(withURL: searchResult.imageUrl)
+        setUpNavBar()
         setUpActions()
-        // request full details
+//        context.getDetails(id: searchResult.id) { result in
+//
+//        }
+    }
+    
+    private func setUpNavBar() {
+        navigationItem.title = searchResult.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                            target: self,
+                                                            action: #selector(didPressAdd))
     }
     
     private func setUpActions() {
@@ -49,16 +61,39 @@ class RestaurantDetailViewController: UIViewController {
         imageViewController.transitioningDelegate = self
         present(imageViewController, animated: true, completion: nil)
     }
+    
+    @objc
+    private func didPressAdd() {
+        let saveToContext = SaveToContext(searchResults: allResults)
+        let saveTo = SaveToViewController(context: saveToContext)
+        saveTo.modalPresentationStyle = .custom
+        saveTo.transitioningDelegate = self
+        present(saveTo, animated: true, completion: nil)
+    }
 }
 
 extension RestaurantDetailViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return ImageViewAnimator(isPresenting: true)
+        switch presented {
+        case is ImageViewController:
+            return ImageViewAnimator(isPresenting: true)
+        case is SaveToViewController:
+            return SaveToAnimator(isPresenting: true)
+        default:
+            return nil
+        }
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return ImageViewAnimator(isPresenting: false)
+        switch dismissed {
+        case is ImageViewController:
+            return ImageViewAnimator(isPresenting: false)
+        case is SaveToViewController:
+            return SaveToAnimator(isPresenting: false)
+        default:
+            return nil
+        }
     }
     
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -66,10 +101,22 @@ extension RestaurantDetailViewController: UIViewControllerTransitioningDelegate 
     }
     
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return (presentedViewController as? ImageViewController)?.interactionController
+        guard let presented = presentedViewController else {
+            return nil
+        }
+        switch presented {
+        case is ImageViewController:
+            return (presented as? ImageViewController)?.interactionController
+        default:
+            return nil
+        }
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return nil
+        guard presented is SaveToViewController else {
+            return nil
+        }
+        return HalfModalPresentationController(presentedViewController: presented,
+                                               presenting: presenting)
     }
 }
