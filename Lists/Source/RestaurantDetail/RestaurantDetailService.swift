@@ -15,28 +15,16 @@ protocol RestaurantDetailService {
 
 struct YelpRestaurantDetailService: RestaurantDetailService {
     
-    private let network: YelpNetworkV2
+    private let network: Network
     
-    init(network: YelpNetworkV2) {
+    init(network: Network) {
         self.network = network
     }
     
     func getDetails(request: RestaurantDetailRequest,
                     completion: @escaping (Result<RestaurantDetailResult>) -> Void) {
         network.requestJson(request) { (result) in
-            switch result {
-            case let .success(value):
-                if let json = value as? Json {
-                    if let detail = RestaurantDetailResult(json: json) {
-                        completion(.success(detail))
-                    }
-                }
-                completion(.failure(NSError(domain: String(describing: type(of: self)),
-                                            code: 0,
-                                            userInfo: nil)))
-            case let .failure(error):
-                completion(.failure(error))
-            }
+            completion(result.mapOptional(RestaurantDetailResult.init))
         }
     }
 }

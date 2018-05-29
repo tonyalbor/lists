@@ -35,7 +35,6 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
     
     private let context: RestaurantSearchContext
     private var searchBar: UISearchBar!
-//    private let disposeBag = DisposeBag()
     
     init(context: RestaurantSearchContext) {
         self.context = context
@@ -50,7 +49,6 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
         super.viewDidLoad()
         setUpNavBar()
         setUpTableView()
-//        bindViewModel()
     }
     
     private func setUpNavBar() {
@@ -68,19 +66,6 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
         tableView.dataSource = self
         tableView.rowHeight = 150
     }
-    
-//    private func bindViewModel() {
-//        let input = RestaurantSearchViewModel.Input(
-//            query: searchBar.rx.text.asDriver())
-//        let output = viewModel.transform(input: input)
-//        output.results
-//            .drive(tableView.rx.items) { table, _, result in
-//                let cell = table.dequeueReusableCell(RestaurantSearchResultTableViewCell.self)
-//                cell.result = result
-//                return cell
-//            }
-//            .disposed(by: disposeBag)
-//    }
 }
 
 extension RestaurantSearchViewController: UITableViewDataSource {
@@ -98,7 +83,7 @@ extension RestaurantSearchViewController: UITableViewDataSource {
 
 extension RestaurantSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailService = YelpRestaurantDetailService(network: YelpNetworkV2(sessionManager: SessionManager()))
+        let detailService = YelpRestaurantDetailService(network: YelpNetwork(sessionManager: SessionManager()))
         let detailContext = RestaurantDetailContext(service: detailService)
         let detail = RestaurantDetailViewController(context: detailContext, searchResult: context.results[indexPath.row])
         navigationController?.pushViewController(detail, animated: true)
@@ -109,7 +94,9 @@ extension RestaurantSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         context.getResults(query: searchBar.text ?? "") { [weak self] result in
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
         }
     }
 }

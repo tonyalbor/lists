@@ -10,9 +10,12 @@ import Alamofire
 import RxAlamofire
 import RxSwift
 
-struct YelpNetworkV2 {
+struct YelpNetwork: Network {
+    
     let sessionManager: SessionManager
-    func requestJson(_ request: APIRequest, completion: @escaping (Result<Any>) -> Void) {
+    let baseUrl = "https://api.yelp.com/v3/"
+    
+    func requestJson(_ request: APIRequest, completion: @escaping (Result<Json>) -> Void) {
         sessionManager
             .request(request,
                      method: request.method,
@@ -21,28 +24,7 @@ struct YelpNetworkV2 {
                      headers: ["Authorization": "Bearer" + " " + YelpApiKey.app])
             .validate(statusCode: 200..<300)
             .responseJSON { response in
-                completion(response.result)
+                completion(response.result.mapOptional { $0 as? Json })
             }
-    }
-}
-
-struct YelpNetwork: Network {
-    
-    let baseUrl = "https://api.yelp.com/v3/"
-    
-    func requestJson(_ request: APIRequest) -> Observable<Json> {
-        return RxAlamofire
-            .json(request.method,
-                  baseUrl + request.urlString,
-                  parameters: nil,
-                  encoding: URLEncoding.default,
-                  headers: ["Authorization": "Bearer" + " " + YelpApiKey.app])
-            .map { json -> Json in
-                if let json = json as? Json {
-                    return json
-                }
-                print("Error receiving json response: \(request.method) \(request.urlString)")
-                return [:]
-        }
     }
 }

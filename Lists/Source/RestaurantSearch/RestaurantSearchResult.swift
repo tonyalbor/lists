@@ -34,7 +34,6 @@ extension RestaurantSearchResult {
               let price = json["price"] as? String else {
             return nil
         }
-        
         self = RestaurantSearchResult(id: id,
                                       name: name,
                                       alias: alias,

@@ -6,10 +6,11 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import RxSwift
+import Alamofire
 
 protocol AutoCompleteService {
-    func getResults(query: String, coordinates: Coordinates) -> Observable<[AutoCompleteResult]>
+    func getResults(request: AutoCompleteRequest,
+                    completion: @escaping (Result<[AutoCompleteResult]>) -> Void)
 }
 
 struct RestaurantAutoCompleteService: AutoCompleteService {
@@ -20,19 +21,16 @@ struct RestaurantAutoCompleteService: AutoCompleteService {
         self.network = network
     }
     
-    func getResults(query: String, coordinates: Coordinates) -> Observable<[AutoCompleteResult]> {
-        let request = AutoCompleteRequest(query: query, coordinates: coordinates)
-        return network.requestJson(request)
-            .catchError({ (error) -> Observable<[String : Any]> in
-                print(error)
-                return .just([:])
-            })
-            .map { json -> [AutoCompleteResult] in
+    func getResults(request: AutoCompleteRequest,
+                    completion: @escaping (Result<[AutoCompleteResult]>) -> Void) {
+        network.requestJson(request) { result in
+            completion(result.mapOptional { json -> [AutoCompleteResult]? in
                 guard let terms = json["terms"] as? [Json] else {
                     print("Failed parsing autocomplete results: \(json)")
-                    return []
+                    return nil
                 }
                 return terms.compactMap(AutoCompleteResult.init)
-            }
+            })
+        }
     }
 }

@@ -41,14 +41,11 @@ extension RestaurantDetailResult {
                 print("Warning: Failed parsing RestaurantDetailResult")
             return nil
         }
-        
         let photoUrlStrings = json["photos"] as? [String] ?? []
         let photos = photoUrlStrings.compactMap(URL.init)
-        
         if photoUrlStrings.count != photos.count {
             print("Warning: Mismatch in business photo urls")
         }
-        
         self = RestaurantDetailResult(id: id,
                                       name: name,
                                       alias: alias,

@@ -15,7 +15,6 @@ extension AutoCompleteResult {
         guard let text = json["text"] as? String else {
             return nil
         }
-        
         self = AutoCompleteResult(text: text)
     }
 }

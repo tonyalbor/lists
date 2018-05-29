@@ -19,6 +19,7 @@ protocol LocationManager {
 class CoreLocationManager: NSObject, LocationManager {
     
     private let manager: CLLocationManager
+    private(set) var currentCoordinates: Coordinates?
     
     init(manager: CLLocationManager) {
         self.manager = manager
@@ -33,8 +34,6 @@ class CoreLocationManager: NSObject, LocationManager {
     func requestAccess() {
         manager.requestWhenInUseAuthorization()
     }
-    
-    private(set) var currentCoordinates: Coordinates?
 }
 
 extension CoreLocationManager: CLLocationManagerDelegate {
@@ -44,9 +43,7 @@ extension CoreLocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        let isNowEnabled = status == .authorizedWhenInUse
-        
-        if isNowEnabled {
+        if status == .authorizedWhenInUse {
             manager.startUpdatingLocation()
         }
     }

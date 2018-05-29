@@ -18,11 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let yelpNetwork = YelpNetwork()
-        let yelpNetwork2 = YelpNetworkV2(sessionManager: SessionManager())
-        let searchService = YelpRestaurantSearchService(network: yelpNetwork2)
+        let yelpNetwork = YelpNetwork(sessionManager: SessionManager())
+        let searchService = YelpRestaurantSearchService(network: yelpNetwork)
         let locationManager = CoreLocationManager(manager: CLLocationManager())
-//        let viewModel = RestaurantSearchViewModel(searchService: searchService, locationManager: locationManager)
         let context = RestaurantSearchContext(service: searchService, locationManager: locationManager)
         let viewController = RestaurantSearchViewController(context: context)
         let navigationController = UINavigationController(rootViewController: viewController)

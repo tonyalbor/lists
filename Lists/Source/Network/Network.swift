@@ -7,20 +7,12 @@
 //
 
 import Alamofire
-import RxAlamofire
-import RxSwift
 
 typealias Json = [String: Any]
 
-protocol APIRequest: URLRequestConvertible, URLConvertible {
+protocol APIRequest: URLConvertible {
     var method: HTTPMethod { get }
     var urlString: String { get }
-}
-
-extension APIRequest {
-    func asURLRequest() throws -> URLRequest {
-        return try URLRequest(url: urlString, method: method)
-    }
 }
 
 extension APIRequest {
@@ -33,5 +25,5 @@ extension APIRequest {
 }
 
 protocol Network {
-    func requestJson(_ request: APIRequest) -> Observable<Json>
+    func requestJson(_ request: APIRequest, completion: @escaping (Result<Json>) -> Void)
 }
