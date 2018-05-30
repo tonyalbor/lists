@@ -6,11 +6,7 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-class SaveToContext {
-    
+struct SaveToContext {
+    let detail: RestaurantSearchResult
     let searchResults: [RestaurantSearchResult]
-    
-    init(searchResults: [RestaurantSearchResult]) {
-        self.searchResults = searchResults
-    }
 }

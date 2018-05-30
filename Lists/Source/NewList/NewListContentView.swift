@@ -1,46 +1,57 @@
 //
-//  SaveToContentView.swift
+//  NewListContentView.swift
 //  Lists
 //
-//  Created by Tony Albor on 5/28/18.
+//  Created by Tony Albor on 5/29/18.
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
 import UIKit
 
-class SaveToContentView: UIView {
+class NewListContentView: UIView {
     
-    private lazy var title: UILabel = {
+    private(set) lazy var title: UILabel = {
         let label = UILabel()
-        label.text = "Save to"
+        label.text = "New List"
         label.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private(set) lazy var add: UIButton = {
-        let button = UIButton(type: .contactAdd)
+    private(set) lazy var back: UIButton = {
+        let button = UIButton()
+        // TODO: get back arrow image
+        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor.black.withAlphaComponent(0.6), for: .highlighted)
+        button.setTitle("Back", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var topSeparator: UIView = {
+    private(set) lazy var topSeparator: UIView = {
         let separator = UIView()
         separator.backgroundColor = .lightGray
         separator.translatesAutoresizingMaskIntoConstraints = false
         return separator
     }()
     
-    private(set) lazy var lists: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    private(set) lazy var imageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    private lazy var bottomSeparator: UIView = {
+    private(set) lazy var textField: UITextField = {
+        let field = UITextField()
+        field.tintColor = .blue
+        field.translatesAutoresizingMaskIntoConstraints = false
+        return field
+    }()
+    
+    // consider adding underline that is constrained to textfield width and is just below the textfield
+    
+    private(set) lazy var bottomSeparator: UIView = {
         let separator = UIView()
         separator.backgroundColor = .lightGray
         separator.translatesAutoresizingMaskIntoConstraints = false
@@ -49,9 +60,20 @@ class SaveToContentView: UIView {
     
     private(set) lazy var cancel: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .white
+        button.setTitle("Cancel", for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.setTitleColor(.lightGray, for: .highlighted)
-        button.setTitle("Cancel", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private(set) lazy var done: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .cyan
+        button.setTitle("Done", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -67,15 +89,25 @@ class SaveToContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = imageView.bounds.height * 0.15
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
+        imageView.layer.borderWidth = 1.0 / UIScreen.main.scale
+    }
+    
     private func setUpSubviews() {
         addSubview(title)
-        addSubview(add)
+        addSubview(back)
         addSubview(topSeparator)
-        addSubview(lists)
+        addSubview(imageView)
+        addSubview(textField)
         addSubview(bottomSeparator)
         addSubview(cancel)
+        addSubview(done)
     }
-
+    
     private func setUpConstraints() {
         var constraints = [NSLayoutConstraint]()
         constraints += [
@@ -84,8 +116,8 @@ class SaveToContentView: UIView {
             title.heightAnchor.constraint(equalToConstant: 32.0),
         ]
         constraints += [
-            add.centerYAnchor.constraint(equalTo: title.centerYAnchor),
-            add.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -1 * 8),
+            back.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+            back.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
         ]
         constraints += [
             topSeparator.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 8),
@@ -94,12 +126,17 @@ class SaveToContentView: UIView {
             topSeparator.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
         ]
         constraints += [
-            lists.topAnchor.constraint(equalTo: topSeparator.bottomAnchor),
-            lists.leadingAnchor.constraint(equalTo: leadingAnchor),
-            lists.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: topSeparator.bottomAnchor, constant: 20),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
         ]
         constraints += [
-            bottomSeparator.topAnchor.constraint(equalTo: lists.bottomAnchor),
+            textField.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12),
+            textField.centerXAnchor.constraint(equalTo: centerXAnchor),
+        ]
+        constraints += [
+            bottomSeparator.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 12),
             bottomSeparator.leadingAnchor.constraint(equalTo: leadingAnchor),
             bottomSeparator.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomSeparator.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
@@ -111,6 +148,7 @@ class SaveToContentView: UIView {
             cancel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
             cancel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ]
+        constraints += done.constraintsTo(view: cancel)
         NSLayoutConstraint.activate(constraints)
     }
 }

@@ -43,11 +43,21 @@ class SaveToViewController: UIViewController {
     
     private func setUpActions() {
         contentView.cancel.addTarget(self, action: #selector(tappedCancel), for: .touchUpInside)
+        contentView.add.addTarget(self, action: #selector(tappedAdd), for: .touchUpInside)
     }
     
     @objc
     private func tappedCancel() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    private func tappedAdd() {
+        let newListContext = NewListContext(detail: context.detail)
+        let vc = NewListViewController(context: newListContext)
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.transitioningDelegate = transitioningDelegate
+        present(vc, animated: false, completion: nil)
     }
 }
 
@@ -72,14 +82,15 @@ extension SaveToViewController: UICollectionViewDelegate {
 
 extension SaveToViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.height * 0.5, height: collectionView.bounds.height * 0.7)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return CGSize(width: collectionView.bounds.height * 0.5,
+                      height: collectionView.bounds.height * 0.7)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 }

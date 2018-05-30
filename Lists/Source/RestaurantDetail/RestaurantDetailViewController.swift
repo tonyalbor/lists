@@ -64,7 +64,7 @@ class RestaurantDetailViewController: UIViewController {
     
     @objc
     private func didPressAdd() {
-        let saveToContext = SaveToContext(searchResults: allResults)
+        let saveToContext = SaveToContext(detail: searchResult, searchResults: allResults)
         let saveTo = SaveToViewController(context: saveToContext)
         saveTo.modalPresentationStyle = .custom
         saveTo.transitioningDelegate = self
