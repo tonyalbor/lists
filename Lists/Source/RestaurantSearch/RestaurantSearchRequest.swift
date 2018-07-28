@@ -9,7 +9,7 @@
 import Alamofire
 
 // https://www.yelp.com/developers/documentation/v3/business_search
-struct RestaurantSearchRequest: APIRequest {
+struct RestaurantSearchRequest: YelpRequest {
     let method = HTTPMethod.get
     var urlString: String {
         var url = "businesses/search?term=\(query)"

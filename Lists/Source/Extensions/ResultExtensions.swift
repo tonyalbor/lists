@@ -17,7 +17,7 @@ extension Result {
                 return .success(transformed)
             } else {
                 // TODO: error details
-                return .failure(NSError())
+                return .failure(NSError(domain: "Lists", code: 0, userInfo: nil))
             }
         case let .failure(error):
             return .failure(error)

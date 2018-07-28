@@ -9,7 +9,7 @@
 import Alamofire
 
 // https://www.yelp.com/developers/documentation/v3/autocomplete
-struct AutoCompleteRequest: APIRequest {
+struct AutoCompleteRequest: YelpRequest {
     let method = HTTPMethod.get
     var urlString: String {
         let url = "autocomplete?text=\(query)&latitude=\(coordinates.latitude)&longitude=\(coordinates.longitude)"

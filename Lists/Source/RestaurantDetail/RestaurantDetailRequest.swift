@@ -9,7 +9,7 @@
 import Alamofire
 
 // https://www.yelp.com/developers/documentation/v3/business
-struct RestaurantDetailRequest: APIRequest {
+struct RestaurantDetailRequest: YelpRequest {
     let method = HTTPMethod.get
     var urlString: String {
         return "businesses/\(businessId)".urlEncoded()

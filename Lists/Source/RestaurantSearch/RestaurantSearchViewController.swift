@@ -59,7 +59,20 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
         super.viewDidLoad()
         setUpNavBar()
         setUpTableView()
+//        let lists = Network(sessionManager: SessionManager())
+//        lists.requestJson(TestRequest()) { (result) in
+//            switch result {
+//            case let .success(value):
+//                print(value)
+//            case let .failure(error):
+//                print(error)
+//            }
+//        }
+//
+//        test = lists
     }
+    
+//    private var test: Network?
     
     private func setUpNavBar() {
         navigationItem.title = "Results" // use actual search term
@@ -93,7 +106,7 @@ extension RestaurantSearchViewController: UITableViewDataSource {
 
 extension RestaurantSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailService = YelpRestaurantDetailService(network: YelpNetwork(sessionManager: SessionManager()))
+        let detailService = YelpRestaurantDetailService(network: Network(sessionManager: SessionManager()))
         let detailContext = RestaurantDetailContext(service: detailService)
         let detail = RestaurantDetailViewController(context: detailContext, searchResult: context.results[indexPath.row], allResults: context.results)
         navigationController?.pushViewController(detail, animated: true)
