@@ -6,6 +6,7 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
 class RestaurantDetailViewController: UIViewController {
@@ -51,8 +52,17 @@ class RestaurantDetailViewController: UIViewController {
     }
     
     private func setUpActions() {
+        setUpImageViewTap()
+        setUpViewOnMapTap()
+    }
+    
+    private func setUpImageViewTap() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleImageViewTap))
         contentView.imageView.addGestureRecognizer(tap)
+    }
+    
+    private func setUpViewOnMapTap() {
+        contentView.viewOnMap.addTarget(self, action: #selector(handleViewOnMapTap), for: .touchUpInside)
     }
     
     @objc
@@ -60,6 +70,23 @@ class RestaurantDetailViewController: UIViewController {
         let imageViewController = ImageViewController(image: contentView.imageView.image)
         imageViewController.transitioningDelegate = self
         present(imageViewController, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func handleViewOnMapTap() {
+        // TODO: get manager from central dependencies
+        let manager = CoreLocationManager(manager: CLLocationManager())
+        // TODO: move this elsewhere. maybe as an extension?
+        func toAnnotation(restaurant: RestaurantSearchResult) -> MapAnnotation {
+            return MapAnnotation(coordinate: restaurant.coordinates,
+                                 title: restaurant.name,
+                                 subtitle: nil)
+        }
+        let annotation = toAnnotation(restaurant: searchResult)
+        let mapContext = MapContext(locationManager: manager, annotations: [annotation])
+        let map = MapViewController(context: mapContext)
+        let navigation = UINavigationController(rootViewController: map)
+        present(navigation, animated: true, completion: nil)
     }
     
     @objc

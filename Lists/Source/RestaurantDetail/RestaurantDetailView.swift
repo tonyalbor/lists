@@ -27,6 +27,16 @@ class RestaurantDetailView: UIView {
         return container
     }()
     
+    private(set) lazy var viewOnMap: UIButton = {
+        let button = UIButton()
+        let titleColor = UIColor.blue
+        button.setTitleColor(titleColor, for: .normal)
+        button.setTitleColor(titleColor.withAlphaComponent(0.6), for: .highlighted)
+        button.setTitle("View on Map", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -41,6 +51,7 @@ class RestaurantDetailView: UIView {
     private func setUpViews() {
         addSubview(imageViewContainer)
         addSubview(imageView)
+        addSubview(viewOnMap)
     }
     
     private func setUpConstraints() {
@@ -55,6 +66,10 @@ class RestaurantDetailView: UIView {
             imageViewContainer.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: -10),
             imageViewContainer.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             imageViewContainer.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
+        ]
+        constraints += [
+            viewOnMap.centerXAnchor.constraint(equalTo: centerXAnchor),
+            viewOnMap.topAnchor.constraint(equalTo: imageViewContainer.bottomAnchor, constant: 24.0),
         ]
         NSLayoutConstraint.activate(constraints)
     }
