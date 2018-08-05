@@ -10,6 +10,15 @@
 		7E7D46FFADD697BFC3409551 /* Pods_ListsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 645BAA5BA5C8F71E9FB23C64 /* Pods_ListsTests.framework */; };
 		C6E1E0905B49903CA218D7DD /* Pods_Lists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76813CA0A0E558DF7274ABEF /* Pods_Lists.framework */; };
 		EA56D5BD210B01B20095C9EA /* ExampleRestaurantsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = EA56D5BC210B01B20095C9EA /* ExampleRestaurantsResponse.json */; };
+		EA56D5C021166D900095C9EA /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5BF21166D900095C9EA /* ListsViewController.swift */; };
+		EA56D5C221166DBA0095C9EA /* ListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C121166DBA0095C9EA /* ListsView.swift */; };
+		EA56D5C421166F460095C9EA /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C321166F460095C9EA /* ListTableViewCell.swift */; };
+		EA56D5C6211671B40095C9EA /* ListsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C5211671B40095C9EA /* ListsContext.swift */; };
+		EA56D5C82116720A0095C9EA /* ListsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C72116720A0095C9EA /* ListsService.swift */; };
+		EA56D5CB21168C530095C9EA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5CA21168C530095C9EA /* MapViewController.swift */; };
+		EA56D5CD21168C620095C9EA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5CC21168C620095C9EA /* MapView.swift */; };
+		EA56D5CF21168DA90095C9EA /* MapContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5CE21168DA90095C9EA /* MapContext.swift */; };
+		EA56D5D12116ABB40095C9EA /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5D02116ABB40095C9EA /* MapAnnotation.swift */; };
 		EA69D1D220BE6F3000707074 /* NewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA69D1D120BE6F3000707074 /* NewListViewController.swift */; };
 		EA69D1D420BE6F4700707074 /* NewListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA69D1D320BE6F4700707074 /* NewListContentView.swift */; };
 		EA69D1D620BE750200707074 /* NewListContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA69D1D520BE750200707074 /* NewListContext.swift */; };
@@ -41,10 +50,6 @@
 		EAEC92D3209ED00A0005843A /* RestaurantDetailResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D2209ED00A0005843A /* RestaurantDetailResult.swift */; };
 		EAEC92D5209ED0110005843A /* RestaurantDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D4209ED0110005843A /* RestaurantDetailService.swift */; };
 		EAEC92DA209ED1C10005843A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D9209ED1C10005843A /* StringExtensions.swift */; };
-		EAEC92DE209FBC8A0005843A /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92DC209FBC8A0005843A /* ListsViewController.swift */; };
-		EAEC92DF209FBC8A0005843A /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEC92DD209FBC8A0005843A /* ListsViewController.xib */; };
-		EAEC92E1209FBC950005843A /* ListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92E0209FBC950005843A /* ListsViewModel.swift */; };
-		EAEC92E3209FBCC10005843A /* GetAllListsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92E2209FBCC10005843A /* GetAllListsUseCase.swift */; };
 		EAEC92E6209FC1170005843A /* RestaurantSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92E4209FC1170005843A /* RestaurantSearchViewController.swift */; };
 		EAEC92E7209FC1170005843A /* RestaurantSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEC92E5209FC1170005843A /* RestaurantSearchViewController.xib */; };
 		EAEC92EA209FC2300005843A /* RestaurantSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92E8209FC2300005843A /* RestaurantSearchResultTableViewCell.swift */; };
@@ -73,6 +78,15 @@
 		7F334628589BCC4FE2ADD936 /* Pods-ListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ListsTests/Pods-ListsTests.release.xcconfig"; sourceTree = "<group>"; };
 		8EB70B69AC86CB94D8848A19 /* Pods-Lists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lists.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lists/Pods-Lists.release.xcconfig"; sourceTree = "<group>"; };
 		EA56D5BC210B01B20095C9EA /* ExampleRestaurantsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExampleRestaurantsResponse.json; sourceTree = "<group>"; };
+		EA56D5BF21166D900095C9EA /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		EA56D5C121166DBA0095C9EA /* ListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsView.swift; sourceTree = "<group>"; };
+		EA56D5C321166F460095C9EA /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		EA56D5C5211671B40095C9EA /* ListsContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsContext.swift; sourceTree = "<group>"; };
+		EA56D5C72116720A0095C9EA /* ListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsService.swift; sourceTree = "<group>"; };
+		EA56D5CA21168C530095C9EA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		EA56D5CC21168C620095C9EA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		EA56D5CE21168DA90095C9EA /* MapContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContext.swift; sourceTree = "<group>"; };
+		EA56D5D02116ABB40095C9EA /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		EA69D1D120BE6F3000707074 /* NewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewController.swift; sourceTree = "<group>"; };
 		EA69D1D320BE6F4700707074 /* NewListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListContentView.swift; sourceTree = "<group>"; };
 		EA69D1D520BE750200707074 /* NewListContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListContext.swift; sourceTree = "<group>"; };
@@ -108,10 +122,6 @@
 		EAEC92D2209ED00A0005843A /* RestaurantDetailResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailResult.swift; sourceTree = "<group>"; };
 		EAEC92D4209ED0110005843A /* RestaurantDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailService.swift; sourceTree = "<group>"; };
 		EAEC92D9209ED1C10005843A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		EAEC92DC209FBC8A0005843A /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
-		EAEC92DD209FBC8A0005843A /* ListsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListsViewController.xib; sourceTree = "<group>"; };
-		EAEC92E0209FBC950005843A /* ListsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewModel.swift; sourceTree = "<group>"; };
-		EAEC92E2209FBCC10005843A /* GetAllListsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllListsUseCase.swift; sourceTree = "<group>"; };
 		EAEC92E4209FC1170005843A /* RestaurantSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchViewController.swift; sourceTree = "<group>"; };
 		EAEC92E5209FC1170005843A /* RestaurantSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantSearchViewController.xib; sourceTree = "<group>"; };
 		EAEC92E8209FC2300005843A /* RestaurantSearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultTableViewCell.swift; sourceTree = "<group>"; };
@@ -168,6 +178,17 @@
 				EA56D5BC210B01B20095C9EA /* ExampleRestaurantsResponse.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		EA56D5C921168C430095C9EA /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				EA56D5CA21168C530095C9EA /* MapViewController.swift */,
+				EA56D5CC21168C620095C9EA /* MapView.swift */,
+				EA56D5CE21168DA90095C9EA /* MapContext.swift */,
+				EA56D5D02116ABB40095C9EA /* MapAnnotation.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		EA69D1D020BE6F1700707074 /* NewList */ = {
@@ -280,6 +301,7 @@
 				EAEC92DB209FBC610005843A /* Lists */,
 				EAD4F57B209E4CC800EE0C46 /* Network */,
 				EA69D1D020BE6F1700707074 /* NewList */,
+				EA56D5C921168C430095C9EA /* Map */,
 				EAEC92CF209ECFD40005843A /* RestaurantDetail */,
 				EABA7660209E7CCE0053E407 /* RestaurantSearch */,
 				EAAFD4D020BD0DDB00F3A7A7 /* SaveTo */,
@@ -346,10 +368,11 @@
 		EAEC92DB209FBC610005843A /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				EAEC92DC209FBC8A0005843A /* ListsViewController.swift */,
-				EAEC92DD209FBC8A0005843A /* ListsViewController.xib */,
-				EAEC92E0209FBC950005843A /* ListsViewModel.swift */,
-				EAEC92E2209FBCC10005843A /* GetAllListsUseCase.swift */,
+				EA56D5BF21166D900095C9EA /* ListsViewController.swift */,
+				EA56D5C121166DBA0095C9EA /* ListsView.swift */,
+				EA56D5C321166F460095C9EA /* ListTableViewCell.swift */,
+				EA56D5C5211671B40095C9EA /* ListsContext.swift */,
+				EA56D5C72116720A0095C9EA /* ListsService.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -447,7 +470,6 @@
 				EA56D5BD210B01B20095C9EA /* ExampleRestaurantsResponse.json in Resources */,
 				EAA9FBDE209E44B900E8F281 /* LaunchScreen.storyboard in Resources */,
 				EAA9FBDB209E44B900E8F281 /* Assets.xcassets in Resources */,
-				EAEC92DF209FBC8A0005843A /* ListsViewController.xib in Resources */,
 				EAA9FBD9209E44B900E8F281 /* Main.storyboard in Resources */,
 				EAEC92EB209FC2300005843A /* RestaurantSearchResultTableViewCell.xib in Resources */,
 			);
@@ -571,11 +593,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAEC92E3209FBCC10005843A /* GetAllListsUseCase.swift in Sources */,
 				EAEC92D3209ED00A0005843A /* RestaurantDetailResult.swift in Sources */,
+				EA56D5C221166DBA0095C9EA /* ListsView.swift in Sources */,
 				EABA7662209E7CF70053E407 /* RestaurantSearchRequest.swift in Sources */,
 				EAAFD4CF20BD06BD00F3A7A7 /* ResultExtensions.swift in Sources */,
 				EAAFD4DD20BD1DFF00F3A7A7 /* HalfModalPresentationController.swift in Sources */,
+				EA56D5C421166F460095C9EA /* ListTableViewCell.swift in Sources */,
 				EAAFD4D220BD0E1000F3A7A7 /* SaveToViewController.swift in Sources */,
 				EAAFD4D620BD0EF500F3A7A7 /* SaveToContext.swift in Sources */,
 				EA69D1D420BE6F4700707074 /* NewListContentView.swift in Sources */,
@@ -587,12 +610,15 @@
 				EAFAD12920BB9A700009D68B /* ImageViewController.swift in Sources */,
 				EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */,
 				EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */,
+				EA56D5CD21168C620095C9EA /* MapView.swift in Sources */,
 				EABA7651209E53E60053E407 /* LocationManager.swift in Sources */,
-				EAEC92E1209FBC950005843A /* ListsViewModel.swift in Sources */,
 				EA69D1D220BE6F3000707074 /* NewListViewController.swift in Sources */,
+				EA56D5CB21168C530095C9EA /* MapViewController.swift in Sources */,
+				EA56D5CF21168DA90095C9EA /* MapContext.swift in Sources */,
 				EAAFD4D420BD0E1B00F3A7A7 /* SaveToContentView.swift in Sources */,
+				EA56D5D12116ABB40095C9EA /* MapAnnotation.swift in Sources */,
+				EA56D5C021166D900095C9EA /* ListsViewController.swift in Sources */,
 				EAEC92DA209ED1C10005843A /* StringExtensions.swift in Sources */,
-				EAEC92DE209FBC8A0005843A /* ListsViewController.swift in Sources */,
 				EAAFD4DA20BD175400F3A7A7 /* SaveToAnimator.swift in Sources */,
 				EAAFD4CD20BD047500F3A7A7 /* RestaurantSearchContext.swift in Sources */,
 				EAAFD4C920BCB01300F3A7A7 /* ImageViewAnimator.swift in Sources */,
@@ -603,10 +629,12 @@
 				EABA7659209E70EA0053E407 /* AutoCompleteResult.swift in Sources */,
 				EAEC92D1209ECFFC0005843A /* RestaurantDetailRequest.swift in Sources */,
 				EAEC92EF20A02D3F0005843A /* RestaurantDetailView.swift in Sources */,
+				EA56D5C6211671B40095C9EA /* ListsContext.swift in Sources */,
 				EA69D1D620BE750200707074 /* NewListContext.swift in Sources */,
 				EAA9FBD4209E44B800E8F281 /* AppDelegate.swift in Sources */,
 				EABA7657209E70C20053E407 /* AutoCompleteRequest.swift in Sources */,
 				EAEC92EA209FC2300005843A /* RestaurantSearchResultTableViewCell.swift in Sources */,
+				EA56D5C82116720A0095C9EA /* ListsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

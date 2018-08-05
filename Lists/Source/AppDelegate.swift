@@ -15,19 +15,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Create network
         let network = Network(sessionManager: SessionManager())
+        
+        // Search
         let searchService = YelpRestaurantSearchService(network: network)
         let locationManager = CoreLocationManager(manager: CLLocationManager())
         let context = RestaurantSearchContext(service: searchService, locationManager: locationManager)
         let viewController = RestaurantSearchViewController(context: context)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.prefersLargeTitles = true
+        let searchNavigation = UINavigationController(rootViewController: viewController)
+        searchNavigation.navigationBar.prefersLargeTitles = true
         
-//        window?.rootViewController = RestaurantDetailViewController()//navigationController
-        window?.rootViewController = navigationController
+        // Lists
+        let listsService = ListsServiceImp(network: network)
+        let listContext = ListsContext(service: listsService)
+        let lists = ListsViewController(context: listContext)
+        let listsNavigation = UINavigationController(rootViewController: lists)
+        listsNavigation.navigationBar.prefersLargeTitles = true
+        
+        // Tab bar
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [searchNavigation, listsNavigation]
+        
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
         return true

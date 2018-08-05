@@ -28,3 +28,8 @@ struct RestaurantSearchRequest: YelpRequest {
     let location: String?
     let coordinates: Coordinates?
 }
+
+struct ListsRestaurantSearchRequest: ListsRequest {
+    let method = HTTPMethod.get
+    let urlString = "restaurants"
+}

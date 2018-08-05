@@ -111,6 +111,7 @@ class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     
     private func setUpConstraints() {
         var constraints = [NSLayoutConstraint]()
+        // TODO: think about making these look like app store home cells
         constraints += backgroundImage.constraintsTo(view: self)
         constraints += imageOverlay.constraintsTo(view: self)
         constraints += [

@@ -9,7 +9,7 @@
 import Alamofire
 
 protocol RestaurantSearchService {
-    func getResults(request: RestaurantSearchRequest,
+    func getResults(request: APIRequest,
                     completion: @escaping (Result<[RestaurantSearchResult]>) -> Void)
 }
 
@@ -21,7 +21,7 @@ struct YelpRestaurantSearchService: RestaurantSearchService {
         self.network = network
     }
     
-    func getResults(request: RestaurantSearchRequest,
+    func getResults(request: APIRequest,
                     completion: @escaping (Result<[RestaurantSearchResult]>) -> Void) {
         network.requestJson(request) { result in
             completion(result.mapOptional { json -> [RestaurantSearchResult]? in

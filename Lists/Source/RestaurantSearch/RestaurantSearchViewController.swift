@@ -59,20 +59,7 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
         super.viewDidLoad()
         setUpNavBar()
         setUpTableView()
-//        let lists = Network(sessionManager: SessionManager())
-//        lists.requestJson(TestRequest()) { (result) in
-//            switch result {
-//            case let .success(value):
-//                print(value)
-//            case let .failure(error):
-//                print(error)
-//            }
-//        }
-//
-//        test = lists
     }
-    
-//    private var test: Network?
     
     private func setUpNavBar() {
         navigationItem.title = "Results" // use actual search term
@@ -81,6 +68,27 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
         navigationItem.searchController = search
         searchBar = search.searchBar
         searchBar.delegate = self
+        setUpMapsButton()
+    }
+    
+    private func setUpMapsButton() {
+        let button = UIBarButtonItem(title: "Map", style: .plain, target: self, action: #selector(didTapMaps))
+        navigationItem.rightBarButtonItem = button
+        button.isEnabled = false
+    }
+    
+    @objc
+    private func didTapMaps() {
+        func toAnnotation(restaurant: RestaurantSearchResult) -> MapAnnotation {
+            return MapAnnotation(coordinate: restaurant.coordinates,
+                                 title: restaurant.name,
+                                 subtitle: nil)
+        }
+        let mapContext = MapContext(locationManager: context.locationManager,
+                                    annotations: context.results.map(toAnnotation))
+        let map = MapViewController(context: mapContext)
+        let navigation = UINavigationController(rootViewController: map)
+        present(navigation, animated: true, completion: nil)
     }
     
     private func setUpTableView() {
@@ -119,6 +127,7 @@ extension RestaurantSearchViewController: UISearchBarDelegate {
         context.getResults(query: searchBar.text ?? "") { [weak self] result in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
+                self?.navigationItem.rightBarButtonItem?.isEnabled = (result.value?.count ?? 0) > 0
             }
         }
     }

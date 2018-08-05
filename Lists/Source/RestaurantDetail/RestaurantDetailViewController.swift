@@ -101,15 +101,10 @@ extension RestaurantDetailViewController: UIViewControllerTransitioningDelegate 
     }
     
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        guard let presented = presentedViewController else {
+        guard let presented = presentedViewController as? ImageViewController else {
             return nil
         }
-        switch presented {
-        case is ImageViewController:
-            return (presented as? ImageViewController)?.interactionController
-        default:
-            return nil
-        }
+        return presented.interactionController
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {

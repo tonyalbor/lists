@@ -18,6 +18,7 @@ struct RestaurantSearchResult {
     let distance: Double
     let rating: Double
     let price: String
+    let coordinates: Coordinates
 }
 
 extension RestaurantSearchResult {
@@ -31,7 +32,11 @@ extension RestaurantSearchResult {
               let imageUrl = URL(string: imageUrlString),
               let distance = json["distance"] as? Double,
               let rating = json["rating"] as? Double,
-              let price = json["price"] as? String else {
+              let price = json["price"] as? String,
+              let coordinatesData = json["coordinates"] as? [String: Any],
+              let longitude = coordinatesData["longitude"] as? Double,
+              let latitude = coordinatesData["latitude"] as? Double else {
+            print("Failed Restaurant Search Result init")
             return nil
         }
         self = RestaurantSearchResult(id: id,
@@ -42,7 +47,8 @@ extension RestaurantSearchResult {
                                       imageUrl: imageUrl,
                                       distance: distance,
                                       rating: rating,
-                                      price: price)
+                                      price: price,
+                                      coordinates: Coordinates(latitude: latitude, longitude: longitude))
     }
 }
 
