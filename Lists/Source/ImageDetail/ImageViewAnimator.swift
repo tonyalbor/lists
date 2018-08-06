@@ -27,12 +27,23 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     private func present(context: UIViewControllerContextTransitioning) {
-        guard let fromNavigation = context.viewController(forKey: .from) as? UINavigationController,
+        guard let tabBar = context.viewController(forKey: .from) as? UITabBarController,
+              let fromNavigation = tabBar.selectedViewController as? UINavigationController,
               let from = fromNavigation.childViewControllers.last as? RestaurantDetailViewController,
               let to = context.viewController(forKey: .to) as? ImageViewController else {
                 return
         }
-        let startingWidth = from.contentView.imageView.bounds.width
+        let overlay = UIView(frame: context.finalFrame(for: to))
+        overlay.backgroundColor = .black
+        overlay.alpha = 0.0
+        context.containerView.addSubview(overlay)
+        
+        let imageCopy = UIImageView(image: from.contentView.imageView.image)
+        context.containerView.addSubview(imageCopy)
+        imageCopy.frame = from.contentView.imageView.frame
+        imageCopy.contentMode = from.contentView.imageView.contentMode
+        
+        let startingWidth = imageCopy.bounds.width
         let finishingWidth = context.finalFrame(for: to).width
         let scale = 1.0 / (startingWidth / finishingWidth)
         context.containerView.addSubview(to.view)
@@ -44,19 +55,15 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             initialSpringVelocity: 0.75,
             options: UIViewAnimationOptions.curveEaseOut,
             animations: {
-                fromNavigation.navigationBar.alpha = 0
-                from.contentView.imageViewContainer.backgroundColor = .black
-                from.view.backgroundColor = .black
-                from.contentView.imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+                overlay.alpha = 1.0
+                imageCopy.transform = CGAffineTransform(scaleX: scale, y: scale)
             },
             completion: { finished in
-                fromNavigation.navigationBar.alpha = 1
+                imageCopy.removeFromSuperview()
+                overlay.removeFromSuperview()
                 to.view.frame = context.finalFrame(for: to)
                 to.view.isHidden = false
-                from.contentView.imageView.transform = .identity
-                from.view.backgroundColor = .white
-                from.contentView.backgroundColor = .white
-                from.contentView.imageViewContainer.backgroundColor = .white
+                from.view.frame = context.finalFrame(for: from)
                 context.completeTransition(!context.transitionWasCancelled)
             })
     }
@@ -71,17 +78,20 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     private func dismissAnimated(context: UIViewControllerContextTransitioning) {
         guard let from = context.viewController(forKey: .from) as? ImageViewController,
-            let toNav = context.viewController(forKey: .to) as? UINavigationController,
+            let tabBar = context.viewController(forKey: .to) as? UITabBarController,
+            let toNav = tabBar.selectedViewController as? UINavigationController,
             let to = toNav.childViewControllers.last as? RestaurantDetailViewController,
             let fromView = context.view(forKey: .from) as? ImageContentView else {
                 return
         }
-        context.containerView.insertSubview(toNav.view, belowSubview: fromView)
+//        context.containerView.insertSubview(toNav.view, belowSubview: fromView)
+        context.containerView.insertSubview(tabBar.view, belowSubview: fromView)
         let imageCopy = UIImageView(image: fromView.imageView.image)
         context.containerView.addSubview(imageCopy)
         imageCopy.contentMode = .scaleAspectFit
         imageCopy.frame = fromView.imageView.frame
-        toNav.view.frame = context.finalFrame(for: toNav)
+//        toNav.view.frame = context.finalFrame(for: toNav)
+        tabBar.view.frame = context.finalFrame(for: tabBar)
         to.view.frame = context.finalFrame(for: to)
         UIView.animate(
             withDuration: transitionDuration(using: context),
@@ -94,14 +104,19 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 fromView.backgroundColor = .white
                 imageCopy.frame = to.contentView.imageView.frame
                 toNav.view.backgroundColor = .white
+                tabBar.view.frame = context.finalFrame(for: tabBar)
+                tabBar.view.backgroundColor = .white
                 to.contentView.backgroundColor = .white
                 to.contentView.imageViewContainer.backgroundColor = .white
             },
             completion: { finished in
                 let success = !context.transitionWasCancelled
-                toNav.view.frame = context.finalFrame(for: toNav)
+//                toNav.view.frame = context.finalFrame(for: toNav)
+                tabBar.view.frame = context.finalFrame(for: tabBar)
                 if success {
-                    toNav.view.removeFromSuperview()
+//                    toNav.view.removeFromSuperview()
+                    tabBar.view.removeFromSuperview()
+                    imageCopy.removeFromSuperview()
                 }
                 fromView.frame = context.finalFrame(for: from)
                 context.completeTransition(success)
@@ -110,13 +125,14 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     private func dismissInteractive(context: UIViewControllerContextTransitioning) {
         guard let from = context.viewController(forKey: .from) as? ImageViewController,
-            let toNav = context.viewController(forKey: .to) as? UINavigationController,
+            let tabBar = context.viewController(forKey: .to) as? UITabBarController,
+            let toNav = tabBar.selectedViewController as? UINavigationController,
             let to = toNav.childViewControllers.last as? RestaurantDetailViewController,
             let fromView = context.view(forKey: .from) as? ImageContentView else {
                 return
         }
-        context.containerView.insertSubview(toNav.view, belowSubview: fromView)
-        toNav.view.frame = context.finalFrame(for: toNav)
+        context.containerView.insertSubview(tabBar.view, belowSubview: fromView)
+        tabBar.view.frame = context.finalFrame(for: tabBar)
         to.view.backgroundColor = .black
         to.contentView.imageViewContainer.backgroundColor = .black
         to.contentView.imageView.isHidden = true
@@ -150,7 +166,7 @@ class ImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                         let success = !context.transitionWasCancelled
                         if success {
                             to.contentView.imageView.isHidden = false
-                            toNav.view.removeFromSuperview()
+                            tabBar.view.removeFromSuperview()
                         }
                         fromView.frame = context.finalFrame(for: from)
                         context.completeTransition(success)
