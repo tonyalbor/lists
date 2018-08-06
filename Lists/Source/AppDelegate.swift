@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Tab bar
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [searchNavigation, listsNavigation]
+        searchNavigation.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        listsNavigation.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
