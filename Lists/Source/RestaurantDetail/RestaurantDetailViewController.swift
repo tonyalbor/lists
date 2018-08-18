@@ -20,10 +20,10 @@ class RestaurantDetailViewController: UIViewController {
     }
     
     private let context: RestaurantDetailContext
-    private let searchResult: RestaurantSearchResult
-    private let allResults: [RestaurantSearchResult]
+    private let searchResult: Restaurant
+    private let allResults: [Restaurant]
     
-    init(context: RestaurantDetailContext, searchResult: RestaurantSearchResult, allResults: [RestaurantSearchResult]) {
+    init(context: RestaurantDetailContext, searchResult: Restaurant, allResults: [Restaurant]) {
         self.context = context
         self.searchResult = searchResult
         self.allResults = allResults
@@ -77,7 +77,7 @@ class RestaurantDetailViewController: UIViewController {
         // TODO: get manager from central dependencies
         let manager = CoreLocationManager(manager: CLLocationManager())
         // TODO: move this elsewhere. maybe as an extension?
-        func toAnnotation(restaurant: RestaurantSearchResult) -> MapAnnotation {
+        func toAnnotation(restaurant: Restaurant) -> MapAnnotation {
             return MapAnnotation(coordinate: restaurant.coordinates,
                                  title: restaurant.name,
                                  subtitle: nil)

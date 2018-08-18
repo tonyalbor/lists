@@ -36,12 +36,14 @@
 		EAAFD4D820BD127500F3A7A7 /* SaveToItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFD4D720BD127500F3A7A7 /* SaveToItemCollectionViewCell.swift */; };
 		EAAFD4DA20BD175400F3A7A7 /* SaveToAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFD4D920BD175400F3A7A7 /* SaveToAnimator.swift */; };
 		EAAFD4DD20BD1DFF00F3A7A7 /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFD4DC20BD1DFF00F3A7A7 /* HalfModalPresentationController.swift */; };
+		EAB72FB42128D03700F4BA4C /* RestaurantSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB72FB32128D03700F4BA4C /* RestaurantSearchResult.swift */; };
+		EAB766D32128D4A100F9CAE7 /* AutoCompleteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB766D22128D4A100F9CAE7 /* AutoCompleteResult.swift */; };
 		EABA7651209E53E60053E407 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7650209E53E60053E407 /* LocationManager.swift */; };
 		EABA7657209E70C20053E407 /* AutoCompleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7656209E70C20053E407 /* AutoCompleteRequest.swift */; };
-		EABA7659209E70EA0053E407 /* AutoCompleteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7658209E70EA0053E407 /* AutoCompleteResult.swift */; };
+		EABA7659209E70EA0053E407 /* AutoCompleteTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7658209E70EA0053E407 /* AutoCompleteTerm.swift */; };
 		EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA765D209E757D0053E407 /* YelpApiKey.swift */; };
 		EABA7662209E7CF70053E407 /* RestaurantSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */; };
-		EABA7664209E7D000053E407 /* RestaurantSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7663209E7D000053E407 /* RestaurantSearchResult.swift */; };
+		EABA7664209E7D000053E407 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7663209E7D000053E407 /* Restaurant.swift */; };
 		EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7665209E7D080053E407 /* RestaurantSearchService.swift */; };
 		EAD4F57A209E4C3000EE0C46 /* AutoCompleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */; };
 		EAD4F57D209E4CF400EE0C46 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F57C209E4CF400EE0C46 /* Network.swift */; };
@@ -107,12 +109,14 @@
 		EAAFD4D720BD127500F3A7A7 /* SaveToItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		EAAFD4D920BD175400F3A7A7 /* SaveToAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToAnimator.swift; sourceTree = "<group>"; };
 		EAAFD4DC20BD1DFF00F3A7A7 /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
+		EAB72FB32128D03700F4BA4C /* RestaurantSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResult.swift; sourceTree = "<group>"; };
+		EAB766D22128D4A100F9CAE7 /* AutoCompleteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteResult.swift; sourceTree = "<group>"; };
 		EABA7650209E53E60053E407 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EABA7656209E70C20053E407 /* AutoCompleteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteRequest.swift; sourceTree = "<group>"; };
-		EABA7658209E70EA0053E407 /* AutoCompleteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteResult.swift; sourceTree = "<group>"; };
+		EABA7658209E70EA0053E407 /* AutoCompleteTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteTerm.swift; sourceTree = "<group>"; };
 		EABA765D209E757D0053E407 /* YelpApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiKey.swift; sourceTree = "<group>"; };
 		EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchRequest.swift; sourceTree = "<group>"; };
-		EABA7663209E7D000053E407 /* RestaurantSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResult.swift; sourceTree = "<group>"; };
+		EABA7663209E7D000053E407 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		EABA7665209E7D080053E407 /* RestaurantSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchService.swift; sourceTree = "<group>"; };
 		EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteService.swift; sourceTree = "<group>"; };
 		EAD4F57C209E4CF400EE0C46 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -312,7 +316,8 @@
 			isa = PBXGroup;
 			children = (
 				EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */,
-				EABA7663209E7D000053E407 /* RestaurantSearchResult.swift */,
+				EABA7663209E7D000053E407 /* Restaurant.swift */,
+				EAB72FB32128D03700F4BA4C /* RestaurantSearchResult.swift */,
 				EAEC92E8209FC2300005843A /* RestaurantSearchResultTableViewCell.swift */,
 				EAEC92E9209FC2300005843A /* RestaurantSearchResultTableViewCell.xib */,
 				EABA7665209E7D080053E407 /* RestaurantSearchService.swift */,
@@ -327,7 +332,8 @@
 			isa = PBXGroup;
 			children = (
 				EABA7656209E70C20053E407 /* AutoCompleteRequest.swift */,
-				EABA7658209E70EA0053E407 /* AutoCompleteResult.swift */,
+				EAB766D22128D4A100F9CAE7 /* AutoCompleteResult.swift */,
+				EABA7658209E70EA0053E407 /* AutoCompleteTerm.swift */,
 				EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */,
 			);
 			path = AutoComplete;
@@ -602,13 +608,14 @@
 				EAEC92ED20A02CC30005843A /* RestaurantDetailViewController.swift in Sources */,
 				EAFAD12B20BB9A880009D68B /* ImageContentView.swift in Sources */,
 				EAD4F57A209E4C3000EE0C46 /* AutoCompleteService.swift in Sources */,
-				EABA7664209E7D000053E407 /* RestaurantSearchResult.swift in Sources */,
+				EABA7664209E7D000053E407 /* Restaurant.swift in Sources */,
 				EAFAD12920BB9A700009D68B /* ImageViewController.swift in Sources */,
 				EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */,
 				EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */,
 				EA56D5CD21168C620095C9EA /* MapView.swift in Sources */,
 				EABA7651209E53E60053E407 /* LocationManager.swift in Sources */,
 				EA69D1D220BE6F3000707074 /* NewListViewController.swift in Sources */,
+				EAB766D32128D4A100F9CAE7 /* AutoCompleteResult.swift in Sources */,
 				EA56D5CB21168C530095C9EA /* MapViewController.swift in Sources */,
 				EA56D5CF21168DA90095C9EA /* MapContext.swift in Sources */,
 				EAAFD4D420BD0E1B00F3A7A7 /* SaveToContentView.swift in Sources */,
@@ -622,7 +629,7 @@
 				EAEC92D5209ED0110005843A /* RestaurantDetailService.swift in Sources */,
 				EAAFD4CB20BD03A400F3A7A7 /* RestaurantDetailContext.swift in Sources */,
 				EAAFD4D820BD127500F3A7A7 /* SaveToItemCollectionViewCell.swift in Sources */,
-				EABA7659209E70EA0053E407 /* AutoCompleteResult.swift in Sources */,
+				EABA7659209E70EA0053E407 /* AutoCompleteTerm.swift in Sources */,
 				EAEC92D1209ECFFC0005843A /* RestaurantDetailRequest.swift in Sources */,
 				EAEC92EF20A02D3F0005843A /* RestaurantDetailView.swift in Sources */,
 				EA56D5C6211671B40095C9EA /* ListsContext.swift in Sources */,
@@ -631,6 +638,7 @@
 				EABA7657209E70C20053E407 /* AutoCompleteRequest.swift in Sources */,
 				EAEC92EA209FC2300005843A /* RestaurantSearchResultTableViewCell.swift in Sources */,
 				EA56D5C82116720A0095C9EA /* ListsService.swift in Sources */,
+				EAB72FB42128D03700F4BA4C /* RestaurantSearchResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

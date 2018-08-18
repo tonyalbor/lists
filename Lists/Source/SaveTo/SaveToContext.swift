@@ -7,6 +7,6 @@
 //
 
 struct SaveToContext {
-    let detail: RestaurantSearchResult
-    let searchResults: [RestaurantSearchResult]
+    let detail: Restaurant
+    let searchResults: [Restaurant]
 }

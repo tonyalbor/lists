@@ -11,7 +11,7 @@ class RestaurantSearchContext {
     let service: RestaurantSearchService
     let locationManager: LocationManager
     
-    private(set) var results = [RestaurantSearchResult]()
+    private(set) var results = [Restaurant]()
     
     init(service: RestaurantSearchService, locationManager: LocationManager) {
         self.service = service
@@ -19,7 +19,7 @@ class RestaurantSearchContext {
     }
     
     func getResults(query: String,
-                    completion: @escaping (Result<[RestaurantSearchResult]>) -> Void) {
+                    completion: @escaping (Result<[Restaurant]>) -> Void) {
         let request = RestaurantSearchRequest(query: query,
                                               location: nil,
                                               coordinates: locationManager.currentCoordinates)

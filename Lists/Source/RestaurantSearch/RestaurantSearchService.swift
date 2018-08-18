@@ -6,9 +6,11 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import Foundation
+
 protocol RestaurantSearchService {
     func getResults(request: APIRequest,
-                    completion: @escaping (Result<[RestaurantSearchResult]>) -> Void)
+                    completion: @escaping (Result<[Restaurant]>) -> Void)
 }
 
 struct YelpRestaurantSearchService: RestaurantSearchService {
@@ -20,7 +22,7 @@ struct YelpRestaurantSearchService: RestaurantSearchService {
     }
     
     func getResults(request: APIRequest,
-                    completion: @escaping (Result<[RestaurantSearchResult]>) -> Void) {
+                    completion: @escaping (Result<[Restaurant]>) -> Void) {
         
         
 //        if let path = Bundle.main.path(forResource: "ExampleRestaurantsResponse", ofType: "json") {
@@ -44,11 +46,11 @@ struct YelpRestaurantSearchService: RestaurantSearchService {
         
         
         network.requestJson(request) { result in
-            completion(result.mapOptional { json -> [RestaurantSearchResult]? in
+            completion(result.mapOptional { json -> [Restaurant]? in
                 guard let businesses = json["businesses"] as? [Json] else {
                     return nil
                 }
-                return businesses.compactMap(RestaurantSearchResult.init)
+                return businesses.compactMap(Restaurant.init)
             })
         }
     }

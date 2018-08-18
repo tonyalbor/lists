@@ -78,7 +78,7 @@ class RestaurantSearchViewController: UIViewController, NibIdentifiable {
     
     @objc
     private func didTapMaps() {
-        func toAnnotation(restaurant: RestaurantSearchResult) -> MapAnnotation {
+        func toAnnotation(restaurant: Restaurant) -> MapAnnotation {
             return MapAnnotation(coordinate: restaurant.coordinates,
                                  title: restaurant.name,
                                  subtitle: nil)

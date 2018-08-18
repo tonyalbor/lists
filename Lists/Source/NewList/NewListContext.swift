@@ -10,7 +10,7 @@ import UIKit
 
 struct NewListContext {
     
-    let detail: RestaurantSearchResult
+    let detail: Restaurant
     
     func createList(title: String) {
         // TODO:

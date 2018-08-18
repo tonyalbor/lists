@@ -10,6 +10,18 @@ import CoreLocation
 
 typealias Coordinates = CLLocationCoordinate2D
 
+extension Coordinates: Decodable {
+    enum Keys: String, CodingKey {
+        case longitude
+        case latitude
+    }
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Keys.self)
+        self = Coordinates(latitude: try container.decode(Double.self, forKey: .latitude),
+                           longitude: try container.decode(Double.self, forKey: .longitude))
+    }
+}
+
 protocol LocationManager {
     var isEnabled: Bool { get }
     func requestAccess()

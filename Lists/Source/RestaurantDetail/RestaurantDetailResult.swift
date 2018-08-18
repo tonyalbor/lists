@@ -19,13 +19,34 @@ struct RestaurantDetailResult {
     let reviewCount: Int
     let phone: String
     let photos: [URL]
-    
-    func printed() {
-        print("id: \(id)\nname: \(name)\nalias: \(alias)\nprice: \(price)")
-    }
 }
 
-extension RestaurantDetailResult {
+extension RestaurantDetailResult: Decodable {
+    enum Keys: String, CodingKey {
+        case id
+        case name
+        case alias
+        case imageUrl = "image_url"
+        case url
+        case price
+        case rating
+        case reviewCount = "review_count"
+        case phone
+        case photos
+    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Keys.self)
+        self = RestaurantDetailResult(id: try container.decode(String.self, forKey: .id),
+                                      name: try container.decode(String.self, forKey: .name),
+                                      alias: try container.decode(String.self, forKey: .alias),
+                                      imageUrl: try container.decode(URL.self, forKey: .imageUrl),
+                                      url: try container.decode(URL.self, forKey: .url),
+                                      price: try container.decode(String.self, forKey: .price),
+                                      rating: try container.decode(Double.self, forKey: .rating),
+                                      reviewCount: try container.decode(Int.self, forKey: .reviewCount),
+                                      phone: try container.decode(String.self, forKey: .phone),
+                                      photos: try container.decode([URL].self, forKey: .photos))
+    }
     init?(json: Json) {
         guard let id = json["id"] as? String,
               let name = json["name"] as? String,

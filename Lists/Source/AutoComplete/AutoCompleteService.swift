@@ -6,9 +6,11 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import Foundation
+
 protocol AutoCompleteService {
     func getResults(request: AutoCompleteRequest,
-                    completion: @escaping (Result<[AutoCompleteResult]>) -> Void)
+                    completion: @escaping (Result<[AutoCompleteTerm]>) -> Void)
 }
 
 struct RestaurantAutoCompleteService: AutoCompleteService {
@@ -20,14 +22,14 @@ struct RestaurantAutoCompleteService: AutoCompleteService {
     }
     
     func getResults(request: AutoCompleteRequest,
-                    completion: @escaping (Result<[AutoCompleteResult]>) -> Void) {
+                    completion: @escaping (Result<[AutoCompleteTerm]>) -> Void) {
         network.requestJson(request) { result in
-            completion(result.mapOptional { json -> [AutoCompleteResult]? in
+            completion(result.mapOptional { json -> [AutoCompleteTerm]? in
                 guard let terms = json["terms"] as? [Json] else {
                     print("Failed parsing autocomplete results: \(json)")
                     return nil
                 }
-                return terms.compactMap(AutoCompleteResult.init)
+                return terms.compactMap(AutoCompleteTerm.init)
             })
         }
     }

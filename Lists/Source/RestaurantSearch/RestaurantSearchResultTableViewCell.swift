@@ -21,7 +21,7 @@ extension Reusable {
 
 class RestaurantSearchResultTableViewCell: UITableViewCell, Reusable {
     
-    var result: RestaurantSearchResult? {
+    var result: Restaurant? {
         didSet {
             guard let result = result else { return }
             backgroundImage.image = nil
