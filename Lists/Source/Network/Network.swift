@@ -6,15 +6,20 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
-
-typealias Json = [String: Any]
+import Foundation
 
 
 // MARK: Requests
 
-protocol APIRequest: URLConvertible {
-    var method: HTTPMethod { get }
+enum HttpMethod {
+    case get
+    case post
+    case put
+    case delete
+}
+
+protocol APIRequest {
+    var method: HttpMethod { get }
     var baseUrlString: String { get }
     var urlString: String { get }
     var headers: [String: String] { get }
@@ -42,11 +47,42 @@ extension ListsRequest {
 }
 
 extension APIRequest {
-    func asURL() throws -> URL {
-        guard let url = URL(string: baseUrlString + urlString) else {
-            throw NSError(domain: "", code: 9, userInfo: nil)
+
+    func asURLRequest() -> URLRequest {
+        var request = URLRequest(url: URL(string: baseUrlString + urlString)!)
+        headers.forEach { request.addValue($0.value, forHTTPHeaderField: $0.key) }
+        return request
+    }
+}
+
+
+// MARK: Result
+
+typealias Json = [String: Any]
+
+enum Result<Value> {
+    case success(Value)
+    case failure(Error)
+    
+    var value: Value? {
+        switch self {
+        case let .success(v): return v
+        case .failure: return nil
         }
-        return url
+    }
+    
+    func mapOptional<T>(_ transform: (Value) -> T?) -> Result<T> {
+        switch self {
+        case let .success(value):
+            if let transformed = transform(value) {
+                return .success(transformed)
+            } else {
+                // TODO: error details
+                return .failure(NSError(domain: "Lists", code: 0, userInfo: nil))
+            }
+        case let .failure(error):
+            return .failure(error)
+        }
     }
 }
 
@@ -59,33 +95,30 @@ protocol Networking {
 
 struct Network: Networking {
     
-    let sessionManager: SessionManager
+    static let `default` = Network(session: URLSession(configuration: .default))
+
+    let session: URLSession
     
     func requestJson(_ request: APIRequest, completion: @escaping (Result<Json>) -> Void) {
-        sessionManager.request(request,
-                               method: request.method,
-                               parameters: nil,
-                               encoding: URLEncoding.default,
-                               headers: request.headers)
-            .validate(statusCode: 200..<300)
-            .responseJSON { response in
-                do {
-                    if let rawResponse = response.data,
-                        let json = try JSONSerialization.jsonObject(with: rawResponse,
-                                                                    options: .allowFragments) as? [String: Any] {
-                        completion(.success(json))
-                        return
-                    }
-                } catch {
-                    // don't need to do anything
-                    print("damn")
-                }
-                completion(response.result.mapOptional { $0 as? Json })
+        let task = session.dataTask(with: request.asURLRequest()) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let response = response as? HTTPURLResponse, let data = data else {
+                completion(.failure(NSError(domain: "server error", code: 0, userInfo: nil)))
+                return
+            }
+            guard let jsonTry = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any], let json = jsonTry else {
+                completion(.failure(NSError(domain: "response json parsing error", code: 10, userInfo: nil)))
+                return
+            }
+            guard (200...299).contains(response.statusCode) else {
+                completion(.failure(NSError(domain: "error response", code: 0, userInfo: json)))
+                return
+            }
+            completion(.success(json))
         }
+        task.resume()
     }
-}
-
-struct TestRequest: ListsRequest {
-    let method = HTTPMethod.get
-    let urlString = "lists"
 }

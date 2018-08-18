@@ -6,8 +6,6 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
-
 struct List {
     let id: Int
     let name: String
@@ -28,7 +26,7 @@ extension List {
 }
 
 struct GetListsRequest: ListsRequest {
-    let method = HTTPMethod.get
+    let method = HttpMethod.get
     let urlString = "lists"
 }
 

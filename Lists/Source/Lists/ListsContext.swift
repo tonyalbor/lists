@@ -6,8 +6,6 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
-
 class ListsContext {
     
     private let service: ListsService

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
-
 protocol AutoCompleteService {
     func getResults(request: AutoCompleteRequest,
                     completion: @escaping (Result<[AutoCompleteResult]>) -> Void)

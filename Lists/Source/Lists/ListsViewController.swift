@@ -6,7 +6,6 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
 import UIKit
 
 class ListsViewController: UIViewController {

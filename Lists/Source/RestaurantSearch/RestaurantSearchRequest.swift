@@ -6,11 +6,9 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
-
 // https://www.yelp.com/developers/documentation/v3/business_search
 struct RestaurantSearchRequest: YelpRequest {
-    let method = HTTPMethod.get
+    let method = HttpMethod.get
     var urlString: String {
         var url = "businesses/search?term=\(query)"
         if let location = location {
@@ -30,6 +28,6 @@ struct RestaurantSearchRequest: YelpRequest {
 }
 
 struct ListsRestaurantSearchRequest: ListsRequest {
-    let method = HTTPMethod.get
+    let method = HttpMethod.get
     let urlString = "restaurants"
 }

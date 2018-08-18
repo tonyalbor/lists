@@ -6,11 +6,9 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
-
 // https://www.yelp.com/developers/documentation/v3/business
 struct RestaurantDetailRequest: YelpRequest {
-    let method = HTTPMethod.get
+    let method = HttpMethod.get
     var urlString: String {
         return "businesses/\(businessId)".urlEncoded()
     }

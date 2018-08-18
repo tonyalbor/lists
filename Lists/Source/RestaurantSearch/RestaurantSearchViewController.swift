@@ -6,7 +6,6 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
 import UIKit
 
 protocol NibIdentifiable {
@@ -114,7 +113,8 @@ extension RestaurantSearchViewController: UITableViewDataSource {
 
 extension RestaurantSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailService = YelpRestaurantDetailService(network: Network(sessionManager: SessionManager()))
+        let network = Network.default
+        let detailService = YelpRestaurantDetailService(network: network)
         let detailContext = RestaurantDetailContext(service: detailService)
         let detail = RestaurantDetailViewController(context: detailContext, searchResult: context.results[indexPath.row], allResults: context.results)
         navigationController?.pushViewController(detail, animated: true)

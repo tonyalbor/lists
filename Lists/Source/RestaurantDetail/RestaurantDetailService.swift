@@ -6,8 +6,6 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
-
 protocol RestaurantDetailService {
     func getDetails(request: RestaurantDetailRequest,
                     completion: @escaping (Result<RestaurantDetailResult>) -> Void)

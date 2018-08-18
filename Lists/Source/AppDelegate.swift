@@ -6,7 +6,6 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
-import Alamofire
 import CoreLocation
 import UIKit
 
@@ -16,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Create network
-        let network = Network(sessionManager: SessionManager())
+        // Network
+        let network = Network.default
         
         // Search
         let searchService = YelpRestaurantSearchService(network: network)
