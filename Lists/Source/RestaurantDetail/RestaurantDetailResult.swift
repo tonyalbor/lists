@@ -22,6 +22,7 @@ struct RestaurantDetailResult {
 }
 
 extension RestaurantDetailResult: Decodable {
+
     enum Keys: String, CodingKey {
         case id
         case name
@@ -34,6 +35,7 @@ extension RestaurantDetailResult: Decodable {
         case phone
         case photos
     }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         self = RestaurantDetailResult(id: try container.decode(String.self, forKey: .id),
@@ -46,36 +48,5 @@ extension RestaurantDetailResult: Decodable {
                                       reviewCount: try container.decode(Int.self, forKey: .reviewCount),
                                       phone: try container.decode(String.self, forKey: .phone),
                                       photos: try container.decode([URL].self, forKey: .photos))
-    }
-    init?(json: Json) {
-        guard let id = json["id"] as? String,
-              let name = json["name"] as? String,
-              let alias = json["alias"] as? String,
-              let imageUrlString = json["image_url"] as? String,
-              let imageUrl = URL(string: imageUrlString),
-              let urlString = json["url"] as? String,
-              let url = URL(string: urlString),
-              let price = json["price"] as? String,
-              let rating = json["rating"] as? Double,
-              let reviewCount = json["review_count"] as? Int,
-              let phone = json["phone"] as? String else {
-                print("Warning: Failed parsing RestaurantDetailResult")
-            return nil
-        }
-        let photoUrlStrings = json["photos"] as? [String] ?? []
-        let photos = photoUrlStrings.compactMap(URL.init)
-        if photoUrlStrings.count != photos.count {
-            print("Warning: Mismatch in business photo urls")
-        }
-        self = RestaurantDetailResult(id: id,
-                                      name: name,
-                                      alias: alias,
-                                      imageUrl: imageUrl,
-                                      url: url,
-                                      price: price,
-                                      rating: rating,
-                                      reviewCount: reviewCount,
-                                      phone: phone,
-                                      photos: photos)
     }
 }

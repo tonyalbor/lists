@@ -22,6 +22,7 @@ struct Restaurant {
 }
 
 extension Restaurant: Decodable {
+
     enum Keys: String, CodingKey {
         case id
         case name
@@ -34,6 +35,7 @@ extension Restaurant: Decodable {
         case price
         case coordinates
     }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         self = Restaurant(id: try container.decode(String.self, forKey: .id),
@@ -49,34 +51,6 @@ extension Restaurant: Decodable {
                                         ?? "nil",
                                       coordinates: try container.decode(Coordinates.self,
                                                                         forKey: .coordinates))
-    }
-    init?(json: Json) {
-        guard let id = json["id"] as? String,
-              let name = json["name"] as? String,
-              let alias = json["alias"] as? String,
-              let reviewCount = json["review_count"] as? Int,
-              let urlString = json["url"] as? String,
-              let imageUrlString = json["image_url"] as? String,
-              let imageUrl = URL(string: imageUrlString),
-              let distance = json["distance"] as? Double,
-              let rating = json["rating"] as? Double,
-              let price = json["price"] as? String,
-              let coordinatesData = json["coordinates"] as? [String: Any],
-              let longitude = coordinatesData["longitude"] as? Double,
-              let latitude = coordinatesData["latitude"] as? Double else {
-            print("Failed Restaurant Search Result init")
-            return nil
-        }
-        self = Restaurant(id: id,
-                                      name: name,
-                                      alias: alias,
-                                      reviewCount: reviewCount,
-                                      urlString: urlString,
-                                      imageUrl: imageUrl,
-                                      distance: distance,
-                                      rating: rating,
-                                      price: price,
-                                      coordinates: Coordinates(latitude: latitude, longitude: longitude))
     }
 }
 

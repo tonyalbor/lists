@@ -14,27 +14,20 @@ struct List {
 }
 
 extension List: Decodable {
+
     enum Keys: String, CodingKey {
         case id
         case name
         case imageURL = "imageUrl"
         case ownerId
     }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         self = List(id: try container.decode(Int.self, forKey: .id),
                     name: try container.decode(String.self, forKey: .name),
                     imageURL: try container.decode(String.self, forKey: .imageURL),
                     ownerId: try container.decode(Int.self, forKey: .ownerId))
-    }
-    init?(json: Json) {
-        guard let id = json["id"] as? Int,
-              let name = json["name"] as? String,
-              let imageURL = json["imageUrl"] as? String,
-              let ownerId = json["ownerId"] as? Int else {
-            return nil
-        }
-        self = List(id: id, name: name, imageURL: imageURL, ownerId: ownerId)
     }
 }
 
@@ -43,9 +36,11 @@ struct ListsResponse {
 }
 
 extension ListsResponse: Decodable {
+
     enum Keys: String, CodingKey {
         case lists
     }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         self = ListsResponse(lists: try container.decode([List].self, forKey: .lists))

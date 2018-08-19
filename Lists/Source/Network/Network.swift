@@ -58,8 +58,6 @@ extension APIRequest {
 
 // MARK: Result
 
-typealias Json = [String: Any]
-
 enum Result<Value> {
     case success(Value)
     case failure(Error)

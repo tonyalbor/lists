@@ -11,17 +11,13 @@ struct AutoCompleteTerm {
 }
 
 extension AutoCompleteTerm: Decodable {
+
     enum Keys: String, CodingKey {
         case text
     }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         self = AutoCompleteTerm(text: try container.decode(String.self, forKey: .text))
-    }
-    init?(json: Json) {
-        guard let text = json["text"] as? String else {
-            return nil
-        }
-        self = AutoCompleteTerm(text: text)
     }
 }
