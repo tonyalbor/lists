@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Search
         let locationManager = CoreLocationManager(manager: CLLocationManager())
-        let context = RestaurantSearchContext(network: Network<RestaurantSearchResult>(), locationManager: locationManager)
+        let context = RestaurantSearchContext(network: Network<RestaurantSearchResponse>(), locationManager: locationManager)
         let viewController = RestaurantSearchViewController(context: context)
         let searchNavigation = UINavigationController(rootViewController: viewController)
         searchNavigation.navigationBar.prefersLargeTitles = true

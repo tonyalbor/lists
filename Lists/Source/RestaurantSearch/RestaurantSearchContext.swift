@@ -8,12 +8,12 @@
 
 class RestaurantSearchContext {
     
-    let network: Network<RestaurantSearchResult>
+    let network: Network<RestaurantSearchResponse>
     let locationManager: LocationManager
     
     private(set) var results = [Restaurant]()
     
-    init(network: Network<RestaurantSearchResult>, locationManager: LocationManager) {
+    init(network: Network<RestaurantSearchResponse>, locationManager: LocationManager) {
         self.network = network
         self.locationManager = locationManager
     }

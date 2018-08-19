@@ -1,5 +1,5 @@
 //
-//  RestaurantDetailResult.swift
+//  RestaurantDetailResponse.swift
 //  Lists
 //
 //  Created by Tony Albor on 5/5/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RestaurantDetailResult {
+struct RestaurantDetailResponse {
     let id: String
     let name: String
     let alias: String
@@ -21,7 +21,7 @@ struct RestaurantDetailResult {
     let photos: [URL]
 }
 
-extension RestaurantDetailResult: Decodable {
+extension RestaurantDetailResponse: Decodable {
 
     enum Keys: String, CodingKey {
         case id
@@ -38,7 +38,7 @@ extension RestaurantDetailResult: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
-        self = RestaurantDetailResult(id: try container.decode(String.self, forKey: .id),
+        self = RestaurantDetailResponse(id: try container.decode(String.self, forKey: .id),
                                       name: try container.decode(String.self, forKey: .name),
                                       alias: try container.decode(String.self, forKey: .alias),
                                       imageUrl: try container.decode(URL.self, forKey: .imageUrl),

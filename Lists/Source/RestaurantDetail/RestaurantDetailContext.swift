@@ -10,15 +10,15 @@ import Foundation
 
 class RestaurantDetailContext {
     
-    private let network: Network<RestaurantDetailResult>
-    private var detail: RestaurantDetailResult?
+    private let network: Network<RestaurantDetailResponse>
+    private var detail: RestaurantDetailResponse?
     
-    init(network: Network<RestaurantDetailResult>) {
+    init(network: Network<RestaurantDetailResponse>) {
         self.network = network
     }
     
     func getDetails(id: String,
-                    completion: @escaping (Result<RestaurantDetailResult>) -> Void) {
+                    completion: @escaping (Result<RestaurantDetailResponse>) -> Void) {
         let request = RestaurantDetailRequest(businessId: id)
         network.request(request) { [weak self] result in
             self?.detail = result.value
