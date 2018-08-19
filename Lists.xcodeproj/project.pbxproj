@@ -44,7 +44,7 @@
 		EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA765D209E757D0053E407 /* YelpApiKey.swift */; };
 		EABA7662209E7CF70053E407 /* RestaurantSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */; };
 		EABA7664209E7D000053E407 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7663209E7D000053E407 /* Restaurant.swift */; };
-		EAD4F57D209E4CF400EE0C46 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F57C209E4CF400EE0C46 /* Network.swift */; };
+		EAD4F57D209E4CF400EE0C46 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F57C209E4CF400EE0C46 /* APIClient.swift */; };
 		EAEC92D1209ECFFC0005843A /* RestaurantDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D0209ECFFC0005843A /* RestaurantDetailRequest.swift */; };
 		EAEC92D3209ED00A0005843A /* RestaurantDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D2209ED00A0005843A /* RestaurantDetailResponse.swift */; };
 		EAEC92DA209ED1C10005843A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D9209ED1C10005843A /* StringExtensions.swift */; };
@@ -114,7 +114,7 @@
 		EABA765D209E757D0053E407 /* YelpApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiKey.swift; sourceTree = "<group>"; };
 		EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchRequest.swift; sourceTree = "<group>"; };
 		EABA7663209E7D000053E407 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		EAD4F57C209E4CF400EE0C46 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		EAD4F57C209E4CF400EE0C46 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		EAEC92D0209ECFFC0005843A /* RestaurantDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailRequest.swift; sourceTree = "<group>"; };
 		EAEC92D2209ED00A0005843A /* RestaurantDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailResponse.swift; sourceTree = "<group>"; };
 		EAEC92D9209ED1C10005843A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -288,6 +288,7 @@
 		EABA765F209E789E0053E407 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EAD4F57B209E4CC800EE0C46 /* API */,
 				EAAFD4DB20BD1DF100F3A7A7 /* Components */,
 				EAA9FBD3209E44B800E8F281 /* AppDelegate.swift */,
 				EAEC92D8209ED1AF0005843A /* Extensions */,
@@ -295,7 +296,6 @@
 				EAAFD4C720BCAFE700F3A7A7 /* ImageDetail */,
 				EABA764F209E53C80053E407 /* Location */,
 				EAEC92DB209FBC610005843A /* Lists */,
-				EAD4F57B209E4CC800EE0C46 /* Network */,
 				EA69D1D020BE6F1700707074 /* NewList */,
 				EA56D5C921168C430095C9EA /* Map */,
 				EAEC92CF209ECFD40005843A /* RestaurantDetail */,
@@ -331,12 +331,12 @@
 			path = AutoComplete;
 			sourceTree = "<group>";
 		};
-		EAD4F57B209E4CC800EE0C46 /* Network */ = {
+		EAD4F57B209E4CC800EE0C46 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				EAD4F57C209E4CF400EE0C46 /* Network.swift */,
+				EAD4F57C209E4CF400EE0C46 /* APIClient.swift */,
 			);
-			path = Network;
+			path = API;
 			sourceTree = "<group>";
 		};
 		EAEC92CF209ECFD40005843A /* RestaurantDetail */ = {
@@ -614,7 +614,7 @@
 				EAAFD4DA20BD175400F3A7A7 /* SaveToAnimator.swift in Sources */,
 				EAAFD4CD20BD047500F3A7A7 /* RestaurantSearchContext.swift in Sources */,
 				EAAFD4C920BCB01300F3A7A7 /* ImageViewAnimator.swift in Sources */,
-				EAD4F57D209E4CF400EE0C46 /* Network.swift in Sources */,
+				EAD4F57D209E4CF400EE0C46 /* APIClient.swift in Sources */,
 				EAAFD4CB20BD03A400F3A7A7 /* RestaurantDetailContext.swift in Sources */,
 				EAAFD4D820BD127500F3A7A7 /* SaveToItemCollectionViewCell.swift in Sources */,
 				EABA7659209E70EA0053E407 /* AutoCompleteTerm.swift in Sources */,

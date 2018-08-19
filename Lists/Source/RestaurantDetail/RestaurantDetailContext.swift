@@ -10,17 +10,17 @@ import Foundation
 
 class RestaurantDetailContext {
     
-    private let network: Network<RestaurantDetailResponse>
+    private let apiClient: APIClient<RestaurantDetailResponse>
     private var detail: RestaurantDetailResponse?
     
-    init(network: Network<RestaurantDetailResponse>) {
-        self.network = network
+    init(apiClient: APIClient<RestaurantDetailResponse>) {
+        self.apiClient = apiClient
     }
     
     func getDetails(id: String,
                     completion: @escaping (Result<RestaurantDetailResponse>) -> Void) {
         let request = RestaurantDetailRequest(businessId: id)
-        network.request(request) { [weak self] result in
+        apiClient.request(request) { [weak self] result in
             self?.detail = result.value
             completion(result)
         }

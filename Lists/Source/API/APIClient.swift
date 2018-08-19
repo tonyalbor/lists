@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  APIClient.swift
 //  Lists
 //
 //  Created by Tony Albor on 5/5/18.
@@ -87,7 +87,7 @@ enum Result<Value> {
 
 // MARK: Networking
 
-struct Network<Entity: Decodable> {
+struct APIClient<Entity: Decodable> {
 
     let session = URLSession.shared
     

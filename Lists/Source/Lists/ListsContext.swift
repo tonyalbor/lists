@@ -8,16 +8,16 @@
 
 class ListsContext {
     
-    private let network: Network<ListsResponse>
+    private let apiClient: APIClient<ListsResponse>
     private(set) var lists = [List]()
     
-    init(network: Network<ListsResponse>) {
-        self.network = network
+    init(apiClient: APIClient<ListsResponse>) {
+        self.apiClient = apiClient
     }
     
     func getLists(completion: @escaping (Result<ListsResponse>) -> Void) {
         let request = GetListsRequest()
-        network.request(request) { [weak self] result in
+        apiClient.request(request) { [weak self] result in
             self?.lists = result.value?.lists ?? []
             completion(result)
         }

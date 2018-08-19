@@ -17,13 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Search
         let locationManager = CoreLocationManager(manager: CLLocationManager())
-        let context = RestaurantSearchContext(network: Network<RestaurantSearchResponse>(), locationManager: locationManager)
+        let context = RestaurantSearchContext(apiClient: APIClient<RestaurantSearchResponse>(), locationManager: locationManager)
         let viewController = RestaurantSearchViewController(context: context)
         let searchNavigation = UINavigationController(rootViewController: viewController)
         searchNavigation.navigationBar.prefersLargeTitles = true
         
         // Lists
-        let listContext = ListsContext(network: Network<ListsResponse>())
+        let listContext = ListsContext(apiClient: APIClient<ListsResponse>())
         let lists = ListsViewController(context: listContext)
         let listsNavigation = UINavigationController(rootViewController: lists)
         listsNavigation.navigationBar.prefersLargeTitles = true

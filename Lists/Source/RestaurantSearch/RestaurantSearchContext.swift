@@ -7,14 +7,14 @@
 //
 
 class RestaurantSearchContext {
-    
-    let network: Network<RestaurantSearchResponse>
+
+    let apiClient: APIClient<RestaurantSearchResponse>
     let locationManager: LocationManager
     
     private(set) var results = [Restaurant]()
     
-    init(network: Network<RestaurantSearchResponse>, locationManager: LocationManager) {
-        self.network = network
+    init(apiClient: APIClient<RestaurantSearchResponse>, locationManager: LocationManager) {
+        self.apiClient = apiClient
         self.locationManager = locationManager
     }
     
@@ -23,7 +23,7 @@ class RestaurantSearchContext {
         let request = RestaurantSearchRequest(query: query,
                                               location: nil,
                                               coordinates: locationManager.currentCoordinates)
-        network.request(request) { [weak self] result in
+        apiClient.request(request) { [weak self] result in
             if case let .success(result) = result {
                 self?.results = result.businesses
             }

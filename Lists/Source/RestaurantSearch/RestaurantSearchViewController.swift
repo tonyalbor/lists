@@ -113,7 +113,7 @@ extension RestaurantSearchViewController: UITableViewDataSource {
 
 extension RestaurantSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailContext = RestaurantDetailContext(network: Network<RestaurantDetailResponse>())
+        let detailContext = RestaurantDetailContext(apiClient: APIClient<RestaurantDetailResponse>())
         let detail = RestaurantDetailViewController(context: detailContext, searchResult: context.results[indexPath.row], allResults: context.results)
         navigationController?.pushViewController(detail, animated: true)
     }
