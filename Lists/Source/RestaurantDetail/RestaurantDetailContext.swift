@@ -6,19 +6,21 @@
 //  Copyright © 2018 Tony Albor. All rights reserved.
 //
 
+import Foundation
+
 class RestaurantDetailContext {
     
-    private let service: RestaurantDetailService
+    private let network: Network<RestaurantDetailResult>
     private var detail: RestaurantDetailResult?
     
-    init(service: RestaurantDetailService) {
-        self.service = service
+    init(network: Network<RestaurantDetailResult>) {
+        self.network = network
     }
     
     func getDetails(id: String,
                     completion: @escaping (Result<RestaurantDetailResult>) -> Void) {
         let request = RestaurantDetailRequest(businessId: id)
-        service.getDetails(request: request) { [weak self] result in
+        network.request(request) { [weak self] result in
             self?.detail = result.value
             completion(result)
         }

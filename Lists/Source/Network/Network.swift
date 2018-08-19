@@ -89,17 +89,11 @@ enum Result<Value> {
 
 // MARK: Networking
 
-protocol Networking {
-    func requestJson(_ request: APIRequest, completion: @escaping (Result<Json>) -> Void)
-}
+struct Network<Entity: Decodable> {
 
-struct Network: Networking {
+    let session = URLSession.shared
     
-    static let `default` = Network(session: URLSession(configuration: .default))
-
-    let session: URLSession
-    
-    func requestJson(_ request: APIRequest, completion: @escaping (Result<Json>) -> Void) {
+    func request(_ request: APIRequest, completion: @escaping (Result<Entity>) -> Void) {
         let task = session.dataTask(with: request.asURLRequest()) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -109,15 +103,16 @@ struct Network: Networking {
                 completion(.failure(NSError(domain: "server error", code: 0, userInfo: nil)))
                 return
             }
-            guard let jsonTry = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any], let json = jsonTry else {
-                completion(.failure(NSError(domain: "response json parsing error", code: 10, userInfo: nil)))
-                return
-            }
             guard (200...299).contains(response.statusCode) else {
-                completion(.failure(NSError(domain: "error response", code: 0, userInfo: json)))
+                completion(.failure(NSError(domain: "error response", code: 0, userInfo: nil)))
                 return
             }
-            completion(.success(json))
+            do {
+                let entity = try JSONDecoder().decode(Entity.self, from: data)
+                completion(.success(entity))
+            } catch {
+                completion(.failure(NSError(domain: "failed json decoding", code: 0, userInfo: nil)))
+            }
         }
         task.resume()
     }

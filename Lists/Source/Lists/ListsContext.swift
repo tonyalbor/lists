@@ -8,17 +8,17 @@
 
 class ListsContext {
     
-    private let service: ListsService
+    private let network: Network<ListsResponse>
     private(set) var lists = [List]()
     
-    init(service: ListsService) {
-        self.service = service
+    init(network: Network<ListsResponse>) {
+        self.network = network
     }
     
-    func getLists(completion: @escaping (Result<[List]>) -> Void) {
+    func getLists(completion: @escaping (Result<ListsResponse>) -> Void) {
         let request = GetListsRequest()
-        service.getLists(request: request) { [weak self] result in
-            self?.lists = result.value ?? []
+        network.request(request) { [weak self] result in
+            self?.lists = result.value?.lists ?? []
             completion(result)
         }
     }

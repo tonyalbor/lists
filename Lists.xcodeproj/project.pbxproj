@@ -14,7 +14,7 @@
 		EA56D5C221166DBA0095C9EA /* ListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C121166DBA0095C9EA /* ListsView.swift */; };
 		EA56D5C421166F460095C9EA /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C321166F460095C9EA /* ListTableViewCell.swift */; };
 		EA56D5C6211671B40095C9EA /* ListsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C5211671B40095C9EA /* ListsContext.swift */; };
-		EA56D5C82116720A0095C9EA /* ListsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C72116720A0095C9EA /* ListsService.swift */; };
+		EA56D5C82116720A0095C9EA /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5C72116720A0095C9EA /* List.swift */; };
 		EA56D5CB21168C530095C9EA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5CA21168C530095C9EA /* MapViewController.swift */; };
 		EA56D5CD21168C620095C9EA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5CC21168C620095C9EA /* MapView.swift */; };
 		EA56D5CF21168DA90095C9EA /* MapContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA56D5CE21168DA90095C9EA /* MapContext.swift */; };
@@ -44,12 +44,9 @@
 		EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA765D209E757D0053E407 /* YelpApiKey.swift */; };
 		EABA7662209E7CF70053E407 /* RestaurantSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */; };
 		EABA7664209E7D000053E407 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7663209E7D000053E407 /* Restaurant.swift */; };
-		EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABA7665209E7D080053E407 /* RestaurantSearchService.swift */; };
-		EAD4F57A209E4C3000EE0C46 /* AutoCompleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */; };
 		EAD4F57D209E4CF400EE0C46 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F57C209E4CF400EE0C46 /* Network.swift */; };
 		EAEC92D1209ECFFC0005843A /* RestaurantDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D0209ECFFC0005843A /* RestaurantDetailRequest.swift */; };
 		EAEC92D3209ED00A0005843A /* RestaurantDetailResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D2209ED00A0005843A /* RestaurantDetailResult.swift */; };
-		EAEC92D5209ED0110005843A /* RestaurantDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D4209ED0110005843A /* RestaurantDetailService.swift */; };
 		EAEC92DA209ED1C10005843A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92D9209ED1C10005843A /* StringExtensions.swift */; };
 		EAEC92E6209FC1170005843A /* RestaurantSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC92E4209FC1170005843A /* RestaurantSearchViewController.swift */; };
 		EAEC92E7209FC1170005843A /* RestaurantSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEC92E5209FC1170005843A /* RestaurantSearchViewController.xib */; };
@@ -83,7 +80,7 @@
 		EA56D5C121166DBA0095C9EA /* ListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsView.swift; sourceTree = "<group>"; };
 		EA56D5C321166F460095C9EA /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		EA56D5C5211671B40095C9EA /* ListsContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsContext.swift; sourceTree = "<group>"; };
-		EA56D5C72116720A0095C9EA /* ListsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsService.swift; sourceTree = "<group>"; };
+		EA56D5C72116720A0095C9EA /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		EA56D5CA21168C530095C9EA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EA56D5CC21168C620095C9EA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EA56D5CE21168DA90095C9EA /* MapContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContext.swift; sourceTree = "<group>"; };
@@ -117,12 +114,9 @@
 		EABA765D209E757D0053E407 /* YelpApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiKey.swift; sourceTree = "<group>"; };
 		EABA7661209E7CF70053E407 /* RestaurantSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchRequest.swift; sourceTree = "<group>"; };
 		EABA7663209E7D000053E407 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		EABA7665209E7D080053E407 /* RestaurantSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchService.swift; sourceTree = "<group>"; };
-		EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteService.swift; sourceTree = "<group>"; };
 		EAD4F57C209E4CF400EE0C46 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		EAEC92D0209ECFFC0005843A /* RestaurantDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailRequest.swift; sourceTree = "<group>"; };
 		EAEC92D2209ED00A0005843A /* RestaurantDetailResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailResult.swift; sourceTree = "<group>"; };
-		EAEC92D4209ED0110005843A /* RestaurantDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailService.swift; sourceTree = "<group>"; };
 		EAEC92D9209ED1C10005843A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		EAEC92E4209FC1170005843A /* RestaurantSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchViewController.swift; sourceTree = "<group>"; };
 		EAEC92E5209FC1170005843A /* RestaurantSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantSearchViewController.xib; sourceTree = "<group>"; };
@@ -320,7 +314,6 @@
 				EAB72FB32128D03700F4BA4C /* RestaurantSearchResult.swift */,
 				EAEC92E8209FC2300005843A /* RestaurantSearchResultTableViewCell.swift */,
 				EAEC92E9209FC2300005843A /* RestaurantSearchResultTableViewCell.xib */,
-				EABA7665209E7D080053E407 /* RestaurantSearchService.swift */,
 				EAEC92E4209FC1170005843A /* RestaurantSearchViewController.swift */,
 				EAEC92E5209FC1170005843A /* RestaurantSearchViewController.xib */,
 				EAAFD4CC20BD047500F3A7A7 /* RestaurantSearchContext.swift */,
@@ -334,7 +327,6 @@
 				EABA7656209E70C20053E407 /* AutoCompleteRequest.swift */,
 				EAB766D22128D4A100F9CAE7 /* AutoCompleteResult.swift */,
 				EABA7658209E70EA0053E407 /* AutoCompleteTerm.swift */,
-				EAD4F579209E4C3000EE0C46 /* AutoCompleteService.swift */,
 			);
 			path = AutoComplete;
 			sourceTree = "<group>";
@@ -352,7 +344,6 @@
 			children = (
 				EAEC92D0209ECFFC0005843A /* RestaurantDetailRequest.swift */,
 				EAEC92D2209ED00A0005843A /* RestaurantDetailResult.swift */,
-				EAEC92D4209ED0110005843A /* RestaurantDetailService.swift */,
 				EAEC92EE20A02D3F0005843A /* RestaurantDetailView.swift */,
 				EAEC92EC20A02CC30005843A /* RestaurantDetailViewController.swift */,
 				EAAFD4CA20BD03A400F3A7A7 /* RestaurantDetailContext.swift */,
@@ -375,7 +366,7 @@
 				EA56D5C121166DBA0095C9EA /* ListsView.swift */,
 				EA56D5C321166F460095C9EA /* ListTableViewCell.swift */,
 				EA56D5C5211671B40095C9EA /* ListsContext.swift */,
-				EA56D5C72116720A0095C9EA /* ListsService.swift */,
+				EA56D5C72116720A0095C9EA /* List.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -607,10 +598,8 @@
 				EAEC92E6209FC1170005843A /* RestaurantSearchViewController.swift in Sources */,
 				EAEC92ED20A02CC30005843A /* RestaurantDetailViewController.swift in Sources */,
 				EAFAD12B20BB9A880009D68B /* ImageContentView.swift in Sources */,
-				EAD4F57A209E4C3000EE0C46 /* AutoCompleteService.swift in Sources */,
 				EABA7664209E7D000053E407 /* Restaurant.swift in Sources */,
 				EAFAD12920BB9A700009D68B /* ImageViewController.swift in Sources */,
-				EABA7666209E7D080053E407 /* RestaurantSearchService.swift in Sources */,
 				EABA765E209E757D0053E407 /* YelpApiKey.swift in Sources */,
 				EA56D5CD21168C620095C9EA /* MapView.swift in Sources */,
 				EABA7651209E53E60053E407 /* LocationManager.swift in Sources */,
@@ -626,7 +615,6 @@
 				EAAFD4CD20BD047500F3A7A7 /* RestaurantSearchContext.swift in Sources */,
 				EAAFD4C920BCB01300F3A7A7 /* ImageViewAnimator.swift in Sources */,
 				EAD4F57D209E4CF400EE0C46 /* Network.swift in Sources */,
-				EAEC92D5209ED0110005843A /* RestaurantDetailService.swift in Sources */,
 				EAAFD4CB20BD03A400F3A7A7 /* RestaurantDetailContext.swift in Sources */,
 				EAAFD4D820BD127500F3A7A7 /* SaveToItemCollectionViewCell.swift in Sources */,
 				EABA7659209E70EA0053E407 /* AutoCompleteTerm.swift in Sources */,
@@ -637,7 +625,7 @@
 				EAA9FBD4209E44B800E8F281 /* AppDelegate.swift in Sources */,
 				EABA7657209E70C20053E407 /* AutoCompleteRequest.swift in Sources */,
 				EAEC92EA209FC2300005843A /* RestaurantSearchResultTableViewCell.swift in Sources */,
-				EA56D5C82116720A0095C9EA /* ListsService.swift in Sources */,
+				EA56D5C82116720A0095C9EA /* List.swift in Sources */,
 				EAB72FB42128D03700F4BA4C /* RestaurantSearchResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,20 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Network
-        let network = Network.default
-        
         // Search
-        let searchService = YelpRestaurantSearchService(network: network)
         let locationManager = CoreLocationManager(manager: CLLocationManager())
-        let context = RestaurantSearchContext(service: searchService, locationManager: locationManager)
+        let context = RestaurantSearchContext(network: Network<RestaurantSearchResult>(), locationManager: locationManager)
         let viewController = RestaurantSearchViewController(context: context)
         let searchNavigation = UINavigationController(rootViewController: viewController)
         searchNavigation.navigationBar.prefersLargeTitles = true
         
         // Lists
-        let listsService = ListsServiceImp(network: network)
-        let listContext = ListsContext(service: listsService)
+        let listContext = ListsContext(network: Network<ListsResponse>())
         let lists = ListsViewController(context: listContext)
         let listsNavigation = UINavigationController(rootViewController: lists)
         listsNavigation.navigationBar.prefersLargeTitles = true

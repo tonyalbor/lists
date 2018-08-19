@@ -1,5 +1,5 @@
 //
-//  ListsService.swift
+//  List.swift
 //  Lists
 //
 //  Created by Tony Albor on 8/4/18.
@@ -38,31 +38,21 @@ extension List: Decodable {
     }
 }
 
+struct ListsResponse {
+    let lists: [List]
+}
+
+extension ListsResponse: Decodable {
+    enum Keys: String, CodingKey {
+        case lists
+    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Keys.self)
+        self = ListsResponse(lists: try container.decode([List].self, forKey: .lists))
+    }
+}
+
 struct GetListsRequest: ListsRequest {
     let method = HttpMethod.get
     let urlString = "lists"
-}
-
-protocol ListsService {
-    func getLists(request: GetListsRequest, completion: @escaping (Result<[List]>) -> Void)
-}
-
-struct ListsServiceImp: ListsService {
-    
-    private let network: Networking
-    
-    init(network: Networking) {
-        self.network = network
-    }
-    
-    func getLists(request: GetListsRequest, completion: @escaping (Result<[List]>) -> Void) {
-        network.requestJson(request) { result in
-            completion(result.mapOptional { json -> [List]? in
-                guard let lists = json["lists"] as? [Json] else {
-                    return nil
-                }
-                return lists.compactMap(List.init)
-            })
-        }
-    }
 }

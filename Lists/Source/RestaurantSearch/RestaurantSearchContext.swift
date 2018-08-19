@@ -8,13 +8,13 @@
 
 class RestaurantSearchContext {
     
-    let service: RestaurantSearchService
+    let network: Network<RestaurantSearchResult>
     let locationManager: LocationManager
     
     private(set) var results = [Restaurant]()
     
-    init(service: RestaurantSearchService, locationManager: LocationManager) {
-        self.service = service
+    init(network: Network<RestaurantSearchResult>, locationManager: LocationManager) {
+        self.network = network
         self.locationManager = locationManager
     }
     
@@ -23,11 +23,18 @@ class RestaurantSearchContext {
         let request = RestaurantSearchRequest(query: query,
                                               location: nil,
                                               coordinates: locationManager.currentCoordinates)
-        service.getResults(request: request) { result in
-            if case let .success(results) = result {
-                self.results = results
+        network.request(request) { [weak self] result in
+            if case let .success(result) = result {
+                self?.results = result.businesses
             }
-            completion(result)
+            let thisResult: Result<[Restaurant]>
+            switch result {
+            case let .success(result):
+                thisResult = .success(result.businesses)
+            case let .failure(error):
+                thisResult = .failure(error)
+            }
+            completion(thisResult)
         }
     }
 }
